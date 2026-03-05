@@ -12,6 +12,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
 public class ReservationServiceTest {
     private ReservationService reservationService;
     private ReservationRepository reservationRepository;
@@ -23,8 +24,6 @@ public class ReservationServiceTest {
 
     @Test
     void shouldCreateReservationWhenValidInput() {
-
-
 
         Reservation reservation = reservationService.createReservation(
                 "John doe",
