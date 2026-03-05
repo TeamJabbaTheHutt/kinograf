@@ -10,16 +10,20 @@ import org.example.kinograf.service.ReservationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+class ReservationServiceTest {
 
-public class ReservationServiceTest {
-    private ReservationService reservationService;
+    private ReservationServiceImpl reservationService;
     private ReservationRepository reservationRepository;
+
     @BeforeEach
     void setup() {
         reservationRepository = mock(ReservationRepository.class);
@@ -29,66 +33,90 @@ public class ReservationServiceTest {
     @Test
     void shouldCreateReservationWhenValidInput() {
 
+        Reservation reservation = new Reservation();
+        reservation.setReservationId(1L);
+        reservation.setCustomerName("John doe");
+        reservation.setPhoneNumber("21212121");
+
+        when(reservationRepository.save(any())).thenReturn(reservation);
+
+        // Act
         ReservationDTO reservationDTO = reservationService.createReservation(
                 "John doe",
                 "21212121"
         );
-        Reservation reservation = ReservationMapper.fromDto(reservationDTO);
-        when(reservationRepository.save(any())).thenReturn(reservation);
-        assertNotNull(reservation);
-        assertEquals("John doe", reservation.getCustomerName());
-        assertEquals("21212121", reservation.getPhoneNumber());
 
-        verify(reservationRepository.save(any()));
+        Reservation result = ReservationMapper.fromDto(reservationDTO);
+
+
+        assertNotNull(reservationDTO);
+        assertEquals("John doe", result.getCustomerName());
+        assertEquals("21212121", result.getPhoneNumber());
+
+        verify(reservationRepository).save(any());
     }
 
     @Test
     void shouldUpdateReservation() {
-        UpdateReservationRequest request = new UpdateReservationRequest("jonny", "21212121");
+
         Long id = 1L;
-        ReservationDTO update = reservationService.updateReservation(
+        Reservation existing = new Reservation();
+        existing.setReservationId(id);
+        existing.setCustomerName("jonny");
+        existing.setPhoneNumber("21212121");
+
+        when(reservationRepository.findById(id)).thenReturn(Optional.of(existing));
+        when(reservationRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+
+        ReservationDTO updated = reservationService.updateReservation(
                 id,
-                request.customerName(),
-                request.phoneNumber()
+                "erik",
+                "32323232"
         );
+        Reservation result = ReservationMapper.fromDto(updated);
+        // Assert directly on DTO
+        assertEquals("erik", result.getCustomerName());
+        assertEquals("32323232", result.getPhoneNumber());
 
-
-        when(reservationRepository.findById(1L)).thenReturn(Optional.of(any()));
-        when(reservationRepository.save(any())).thenReturn(update);
-
-        ReservationDTO updated = reservationService.updateReservation(1L, "erik" , "32323232");
-        Reservation reservation = ReservationMapper.fromDto(updated);
-        assertEquals("erik", reservation.getCustomerName());
-        assertEquals("32323232", reservation.getCustomerName());
-
-        verify(reservationRepository).save(reservation);
+        verify(reservationRepository).save(existing);
     }
 
     @Test
     void shouldGetAllReservations() {
 
         Reservation r1 = new Reservation();
+        r1.setReservationId(1L);
         r1.setCustomerName("jon");
         r1.setPhoneNumber("11111111");
-        Reservation r2 = new Reservation();
-        r2.setCustomerName("Jane");
-        r2.setPhoneNumber("222222222");
-        List<Reservation> reservations = List.of(
-                r1,
-                r2
-        );
-        when(reservationRepository.findAll()).thenReturn(reservations);
-        List<ReservationDTO> result = reservationService.getAllReservations();
-        assertEquals(2, result.size());
-        verify(reservationRepository).findAll();
 
+        Reservation r2 = new Reservation();
+        r2.setReservationId(2L);
+        r2.setCustomerName("Jane");
+        r2.setPhoneNumber("22222222");
+
+        when(reservationRepository.findAll()).thenReturn(List.of(r1, r2));
+
+        List<ReservationDTO> result = reservationService.getAllReservations();
+
+        List<Reservation> resultset = new ArrayList<>();
+        for (ReservationDTO dto : result) {
+            resultset.add(ReservationMapper.fromDto(dto));
+        }
+
+        assertEquals(2, result.size());
+        assertEquals("jon", resultset.get(0).getCustomerName());
+        assertEquals("Jane", resultset.get(1).getCustomerName());
+
+        verify(reservationRepository).findAll();
     }
 
     @Test
     void shouldDeleteReservation() {
+
+        when(reservationRepository.existsById(1L)).thenReturn(true);
         doNothing().when(reservationRepository).deleteById(1L);
+
         reservationService.deleteReservation(1L);
         verify(reservationRepository).deleteById(1L);
     }
-
 }

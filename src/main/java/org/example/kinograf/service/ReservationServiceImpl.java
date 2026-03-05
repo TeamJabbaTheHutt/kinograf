@@ -62,6 +62,8 @@ public class ReservationServiceImpl implements ReservationService {
             String phoneNumber
     ) {
         Reservation existing = reservationRepository.findById(reservationId).orElse(null);
+        existing.setCustomerName(customerName);
+        existing.setPhoneNumber(phoneNumber);
         return ReservationMapper.toDto(reservationRepository.save(existing));
     }
 
