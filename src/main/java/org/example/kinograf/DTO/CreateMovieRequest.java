@@ -1,9 +1,8 @@
 package org.example.kinograf.DTO;
 
-
-public record MovieDTO(
-        Long movieId,
+public record CreateMovieRequest(
         String name,
         String categories,
-        int ageLimit) {
+        int ageLimit
+) {
 }
