@@ -6,7 +6,6 @@ import org.example.kinograf.DTO.UpdateMovieRequest;
 import org.example.kinograf.mapper.MovieMapper;
 import org.example.kinograf.model.Movie;
 import org.example.kinograf.repository.MovieRepository;
-import org.example.kinograf.repository.ReservationRepository;
 import org.example.kinograf.service.MovieService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 public class MovieServiceTest {
 
     private MovieService movieService;
@@ -29,82 +29,78 @@ public class MovieServiceTest {
 
     @Test
     void shouldCreateMovieWhenValidInput() {
+        // Arrange
+        CreateMovieRequest request = new CreateMovieRequest("movieName", "SCIFI", 10);
+        Movie movie = MovieMapper.toEntity(request);
+        movie.setMovieId(1L);
 
+        when(movieRepository.save(any(Movie.class))).thenReturn(movie);
+
+        // Act
         MovieDTO movieDTO = movieService.createMovie(
-                "movieName",
-                "SCIFI",
-                10
+                request.name(),
+                request.categories(),
+                request.ageLimit()
         );
 
-        CreateMovieRequest request = new CreateMovieRequest("NewMovieName", "SCIFI", 10);
-        Long id = 1L;
-        Movie movie = MovieMapper.toEntity(request);
+        // Assert
+        assertNotNull(movieDTO);
+        assertEquals("movieName", movieDTO.name());
+        assertEquals("SCIFI", movieDTO.categories());
+        assertEquals(10, movieDTO.ageLimit());
 
-        when(movieRepository.save(any())).thenReturn(movie);
-
-        assertNotNull(movie);
-        assertEquals("movieName", movie.getName());
-        assertEquals("SCIFI", movie.getCategories());
-        assertEquals(10, movie.getAgeLimit());
-
-        verify(movieRepository).save(any());
+        verify(movieRepository).save(any(Movie.class));
     }
 
     @Test
     void shouldUpdateMovie() {
-        CreateMovieRequest request = new CreateMovieRequest("movieName", "SCIFI", 10);
-        Long id = 1L;
-
-
-
-        Movie movie = MovieMapper.toEntity(request);
+        // Arrange
+        Movie movie = new Movie("movieName", "SCIFI", 10);
+        movie.setMovieId(1L);
 
         when(movieRepository.findById(1L)).thenReturn(Optional.of(movie));
-        when(movieRepository.save(any())).thenReturn(movie);
+        when(movieRepository.save(any(Movie.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
+        // Act
+        MovieDTO updatedDTO = movieService.updateMovie(1L, "newMovie", "ACTION", 15);
 
-
-        assertEquals("newMovie", movie.getName());
-        assertEquals("ACTION", movie.getCategories());
-        assertEquals(15, movie.getAgeLimit());
+        // Assert
+        assertNotNull(updatedDTO);
+        assertEquals("newMovie", updatedDTO.name());
+        assertEquals("ACTION", updatedDTO.categories());
+        assertEquals(15, updatedDTO.ageLimit());
 
         verify(movieRepository).save(movie);
     }
 
     @Test
     void shouldGetAllMovies() {
-        Movie m1 = new Movie();
-        m1.setName("movieName1");
-        m1.setCategories("SCIFI");
-        m1.setAgeLimit(10);
-        Movie m2 = new Movie();
-        m2.setName("movieName2");
-        m2.setCategories("THRILLER");
-        m2.setAgeLimit(10);
+        // Arrange
+        Movie m1 = new Movie("movieName1", "SCIFI", 10);
+        Movie m2 = new Movie("movieName2", "THRILLER", 12);
 
+        when(movieRepository.findAll()).thenReturn(List.of(m1, m2));
 
-
-        List<Movie> movies = List.of(
-                m1,
-                m2
-        );
-
-        when(movieRepository.findAll()).thenReturn(movies);
-
+        // Act
         List<MovieDTO> result = movieService.getAllMovies();
 
+        // Assert
         assertEquals(2, result.size());
+        assertEquals("movieName1", result.get(0).name());
+        assertEquals("movieName2", result.get(1).name());
 
         verify(movieRepository).findAll();
     }
 
     @Test
     void shouldDeleteMovie() {
-
+        // Arrange
         doNothing().when(movieRepository).deleteById(1L);
 
+        // Act
         movieService.deleteMovie(1L);
 
+        // Assert
         verify(movieRepository).deleteById(1L);
     }
 }
