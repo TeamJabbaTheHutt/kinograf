@@ -1,7 +1,6 @@
 package org.example.kinograf.model;
 
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.*;
 @Entity
 public class Ticket {
@@ -73,51 +72,4 @@ public class Ticket {
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
-    //    public Ticket(Long ticketId, Long showingId, Long reservationId, Long seatId, double price) {
-//        this.ticketId = ticketId;
-//        this.showingId = showingId;
-//        this.reservationId = reservationId;
-//        this.seatId = seatId;
-//        this.price = price;
-//    }
-//
-//    public Long getTicketId() {
-//        return ticketId;
-//    }
-//
-//    public void setTicketId(Long ticketId) {
-//        this.ticketId = ticketId;
-//    }
-//
-//    public Long getShowingId() {
-//        return showingId;
-//    }
-//
-//    public void setShowingId(Long showingId) {
-//        this.showingId = showingId;
-//    }
-//
-//    public Long getReservationId() {
-//        return reservationId;
-//    }
-//
-//    public void setReservationId(Long reservationId) {
-//        this.reservationId = reservationId;
-//    }
-//
-//    public Long getSeatId() {
-//        return seatId;
-//    }
-//
-//    public void setSeatId(Long seatId) {
-//        this.seatId = seatId;
-//    }
-//
-//    public double getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(double price) {
-//        this.price = price;
-//    }
 }
