@@ -12,7 +12,7 @@ public class Ticket {
 
 
     @ManyToOne
-    @JoinColumn(name = "showtimes_id")
+    @JoinColumn(name = "showTimes_id")
     private ShowTimes showTimes;
 
     @ManyToOne
