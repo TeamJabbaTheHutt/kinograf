@@ -7,12 +7,11 @@ import java.util.List;
 
 @Entity
 public class ShowTimes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long showTimesId;
 
-//    private Long movieId;
-//    private Long theatreId;
     private LocalDate timeOfDay;
 
     @ManyToOne
@@ -26,14 +25,11 @@ public class ShowTimes {
     @OneToMany(mappedBy = "showtimes")
     private List<Ticket> tickets;
 
+    public ShowTimes() {}
 
-    public ShowTimes() {
-    }
-
-    public ShowTimes(Long showTimesId, Long movieId, Long theatreId, LocalDate timeOfDay) {
-        this.showTimesId = showTimesId;
-        this.movieId = movieId;
-        this.theatreId = theatreId;
+    public ShowTimes(Movie movie, Theatre theatre, LocalDate timeOfDay) {
+        this.movie = movie;
+        this.theatre = theatre;
         this.timeOfDay = timeOfDay;
     }
 
@@ -45,22 +41,6 @@ public class ShowTimes {
         this.showTimesId = showTimesId;
     }
 
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
-
-    public Long getTheatreId() {
-        return theatreId;
-    }
-
-    public void setTheatreId(Long theatreId) {
-        this.theatreId = theatreId;
-    }
-
     public LocalDate getTimeOfDay() {
         return timeOfDay;
     }
@@ -68,5 +48,28 @@ public class ShowTimes {
     public void setTimeOfDay(LocalDate timeOfDay) {
         this.timeOfDay = timeOfDay;
     }
-}
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+}

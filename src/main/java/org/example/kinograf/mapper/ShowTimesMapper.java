@@ -8,10 +8,9 @@ public class ShowTimesMapper {
     public static ShowTimesDTO toDTO(ShowTimes showTimes) {
         return new ShowTimesDTO(
                 showTimes.getShowTimesId(),
-                showTimes.getMovieId(),
-                showTimes.getTheatreId(),
+                showTimes.getMovie().getMovieId(),
+                showTimes.getTheatre().getTheatreId(),
                 showTimes.getTimeOfDay()
         );
-
     }
 }

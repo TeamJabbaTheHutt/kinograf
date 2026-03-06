@@ -2,8 +2,12 @@ package org.example.kinograf.service;
 
 import org.example.kinograf.DTO.ShowTimesDTO;
 import org.example.kinograf.mapper.ShowTimesMapper;
+import org.example.kinograf.model.Movie;
 import org.example.kinograf.model.ShowTimes;
+import org.example.kinograf.model.Theatre;
+import org.example.kinograf.repository.MovieRepository;
 import org.example.kinograf.repository.ShowtimeRepository;
+import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,9 +18,13 @@ import java.util.Optional;
 public class ShowtimeService {
 
     private final ShowtimeRepository showtimeRepository;
+    private final MovieRepository movieRepository;
+    private final TheatreRepository theatreRepository;
 
-    public ShowtimeService(ShowtimeRepository showtimeRepository) {
+    public ShowtimeService(ShowtimeRepository showtimeRepository, MovieRepository movieRepository, TheatreRepository theatreRepository) {
         this.showtimeRepository = showtimeRepository;
+        this.movieRepository = movieRepository;
+        this.theatreRepository = theatreRepository;
     }
 
     public List<ShowTimesDTO> getALlShowTimes() {
@@ -31,18 +39,22 @@ public class ShowtimeService {
         return Optional.empty();
     }
 
-    public ShowTimesDTO createShowTimes(
-            Long movieId,
-            Long theatreId,
-            LocalDate timeOfDay
-    ) {
-        ShowTimes showTimes = new ShowTimes();
+    public ShowTimesDTO createShowTimes(Long movieId, Long theatreId, LocalDate timeOfDay) {
 
-        showTimes.setMovieId(movieId);
-        showTimes.setTheatreId(theatreId);
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        Theatre theatre = theatreRepository.findById(theatreId)
+                .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        ShowTimes showTimes = new ShowTimes();
+        showTimes.setMovie(movie);
+        showTimes.setTheatre(theatre);
         showTimes.setTimeOfDay(timeOfDay);
 
-        return ShowTimesMapper.toDTO(showtimeRepository.save(showTimes));
+        showtimeRepository.save(showTimes);
+
+        return ShowTimesMapper.toDTO(showTimes);
     }
 
     public ShowTimesDTO updateShowTime(
@@ -51,17 +63,26 @@ public class ShowtimeService {
             Long theatreId,
             LocalDate timeOfDay
     ) {
+
         ShowTimes updated = showtimeRepository.findById(showTimesId).orElse(null);
 
         if (updated == null) {
             return null;
         }
 
-        updated.setMovieId(movieId);
-        updated.setTheatreId(theatreId);
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        Theatre theatre = theatreRepository.findById(theatreId)
+                .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        updated.setMovie(movie);
+        updated.setTheatre(theatre);
         updated.setTimeOfDay(timeOfDay);
 
-        return ShowTimesMapper.toDTO(showtimeRepository.save(updated));
+        showtimeRepository.save(updated);
+
+        return ShowTimesMapper.toDTO(updated);
     }
 
     public void deleteShowTimes(Long id) {
