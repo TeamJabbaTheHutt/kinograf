@@ -3,7 +3,13 @@ package org.example.kinograf.service;
 
 import org.example.kinograf.DTO.TicketDTO;
 import org.example.kinograf.mapper.TicketMapper;
+import org.example.kinograf.model.Reservation;
+import org.example.kinograf.model.Seat;
+import org.example.kinograf.model.ShowTimes;
 import org.example.kinograf.model.Ticket;
+import org.example.kinograf.repository.ReservationRepository;
+import org.example.kinograf.repository.SeatRepository;
+import org.example.kinograf.repository.ShowtimeRepository;
 import org.example.kinograf.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +20,18 @@ import java.util.Optional;
 @Service
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
-
+    private final ShowtimeRepository showtimesRepository;
+    private final ReservationRepository reservationRepository;
+    private final SeatRepository seatRepository;
     //crud
-    public TicketServiceImpl(TicketRepository ticketRepository) {
+
+    public TicketServiceImpl(TicketRepository ticketRepository, ShowtimeRepository showtimeRepository, ReservationRepository reservationRepository, SeatRepository seatRepository) {
         this.ticketRepository = ticketRepository;
+        this.showtimesRepository = showtimeRepository;
+        this.reservationRepository = reservationRepository;
+        this.seatRepository = seatRepository;
     }
+
     //    List<TicketDTO> getAllTickets();
 
     @Override
@@ -54,21 +67,26 @@ public class TicketServiceImpl implements TicketService {
 //    );
 //
     @Override
-    public TicketDTO createTicket(
-            Long showingId,
-            Long reservationId,
-            Long seatId,
-            double price
-    ) {
+    public TicketDTO createTicket(Long showingId, Long reservationId, Long seatId, double price) {
+
+        ShowTimes showTimes = showtimesRepository.findById(showingId)
+                .orElseThrow();
+
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow();
+
+        Seat seat = seatRepository.findById(seatId)
+                .orElseThrow();
+
         Ticket ticket = new Ticket();
-        ticket.setSeatId(showingId);
-        ticket.setReservationId(showingId);
-        ticket.setSeatId(seatId);
         ticket.setPrice(price);
+        ticket.setShowTimes(showTimes);
+        ticket.setReservation(reservation);
+        ticket.setSeat(seat);
 
         Ticket saved = ticketRepository.save(ticket);
-        return TicketMapper.toDTO(saved);
 
+        return TicketMapper.toDTO(saved);
     }
 
 //    TicketDTO updateTicket(
@@ -88,13 +106,27 @@ public class TicketServiceImpl implements TicketService {
             Long seatId,
             double price
     ) {
-        Ticket existing = ticketRepository.findById(ticketId).orElse(null);
-        existing.setShowingId(showingId);
-        existing.setReservationId(reservationId);
-        existing.setSeatId(seatId);
+
+        Ticket existing = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        ShowTimes showTimes = showtimesRepository.findById(showingId)
+                .orElseThrow(() -> new RuntimeException("Showtime not found"));
+
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+
+        Seat seat = seatRepository.findById(seatId)
+                .orElseThrow(() -> new RuntimeException("Seat not found"));
+
+        existing.setShowTimes(showTimes);
+        existing.setReservation(reservation);
+        existing.setSeat(seat);
         existing.setPrice(price);
 
-        return TicketMapper.toDTO(ticketRepository.save(existing));
+        Ticket saved = ticketRepository.save(existing);
+
+        return TicketMapper.toDTO(saved);
     }
 //    void deleteTicket(Long ticketId);
 

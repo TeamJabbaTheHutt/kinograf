@@ -58,4 +58,12 @@ public class Movie {
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
     }
+
+    public List<ShowTimes> getShowTimes() {
+        return showTimes;
+    }
+
+    public void setShowTimes(List<ShowTimes> showTimes) {
+        this.showTimes = showTimes;
+    }
 }

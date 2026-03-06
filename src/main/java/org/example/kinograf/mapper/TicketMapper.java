@@ -8,21 +8,17 @@ public class TicketMapper {
     public static TicketDTO toDTO(Ticket ticket) {
         return new TicketDTO(
                 ticket.getTicketId(),
-                ticket.getShowTimes(),
-                ticket.getReservation(),
-                ticket.getSeat(),
+                ticket.getShowTimes().getShowTimesId(),
+                ticket.getReservation().getReservationId(),
+                ticket.getSeat().getSeatId(),
                 ticket.getPrice()
         );
     }
 
-    public static Ticket fromDTO(TicketDTO ticketDTO) {
+    public static Ticket fromDTO(TicketDTO dto) {
         Ticket ticket = new Ticket();
-        ticket.setTicketId(ticketDTO.ticketId());
-        ticket.getShowTimes();
-        ticket.getReservation();
-        ticket.getSeat();
-        ticket.setPrice(ticketDTO.price());
-
+        ticket.setTicketId(dto.ticketId());
+        ticket.setPrice(dto.price());
         return ticket;
     }
 }
