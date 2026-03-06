@@ -22,7 +22,7 @@ public class ShowTimes {
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
-    @OneToMany(mappedBy = "showtimes")
+    @OneToMany(mappedBy = "showTimes")
     private List<Ticket> tickets;
 
     public ShowTimes() {}
