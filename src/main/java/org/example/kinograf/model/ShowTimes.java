@@ -1,11 +1,9 @@
 package org.example.kinograf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class ShowTimes {
@@ -13,9 +11,21 @@ public class ShowTimes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long showTimesId;
 
-    private Long movieId;
-    private Long theatreId;
+//    private Long movieId;
+//    private Long theatreId;
     private LocalDate timeOfDay;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "theatre_id")
+    private Theatre theatre;
+
+    @OneToMany(mappedBy = "showtimes")
+    private List<Ticket> tickets;
+
 
     public ShowTimes() {
     }

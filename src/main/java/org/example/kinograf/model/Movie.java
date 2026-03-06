@@ -1,9 +1,8 @@
 package org.example.kinograf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -15,6 +14,9 @@ public class Movie {
     private String name;
     private String categories;
     private int ageLimit;
+
+    @OneToMany(mappedBy = "movie")
+    private List<ShowTimes> showTimes;
 
     public Movie() {
     }

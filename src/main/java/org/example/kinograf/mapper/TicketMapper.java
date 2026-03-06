@@ -8,9 +8,9 @@ public class TicketMapper {
     public static TicketDTO toDTO(Ticket ticket) {
         return new TicketDTO(
                 ticket.getTicketId(),
-                ticket.getShowingId(),
-                ticket.getReservationId(),
-                ticket.getSeatId(),
+                ticket.getShowTimes(),
+                ticket.getReservation(),
+                ticket.getSeat(),
                 ticket.getPrice()
         );
     }
@@ -18,9 +18,9 @@ public class TicketMapper {
     public static Ticket fromDTO(TicketDTO ticketDTO) {
         Ticket ticket = new Ticket();
         ticket.setTicketId(ticketDTO.ticketId());
-        ticket.setShowingId(ticketDTO.showingId());
-        ticket.setReservationId(ticketDTO.reservationId());
-        ticket.setSeatId(ticketDTO.seatId());
+        ticket.getShowTimes();
+        ticket.getReservation();
+        ticket.getSeat();
         ticket.setPrice(ticketDTO.price());
 
         return ticket;
