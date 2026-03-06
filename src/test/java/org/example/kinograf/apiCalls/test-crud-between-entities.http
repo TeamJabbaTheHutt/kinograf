@@ -1,0 +1,76 @@
+### Create a Theatre
+POST http://localhost:8080/home/theatre
+Content-Type: application/json
+
+{
+  "theatreName": "Grand Cinema",
+  "capacity": 100
+}
+
+### Get all Theatres (to retrieve the ID)
+GET http://localhost:8080/home/theatres
+
+### Create a Movie
+POST http://localhost:8080/movies
+Content-Type: application/json
+
+{
+  "name": "Avengers: Endgame",
+  "categories": "Action, Adventure",
+  "ageLimit": 13
+}
+
+### Get all Movies (to retrieve the ID)
+GET http://localhost:8080/movies
+
+### Create a ShowTime
+POST http://localhost:8080/showTimes
+Content-Type: application/json
+
+{
+  "movieId": 1,
+  "theatreId": 1,
+  "timeOfDay": "2026-03-06"
+}
+
+### Get all ShowTimes
+GET http://localhost:8080/showTimes
+
+### Create a Seat
+POST http://localhost:8080/seats
+Content-Type: application/json
+
+{
+  "theatreId": 1,
+  "rowNumber": 1,
+  "seatNumber": 1
+}
+
+### Get all Seats
+GET http://localhost:8080/seats
+
+### Create a Reservation
+POST http://localhost:8080/reservation
+Content-Type: application/json
+
+{
+  "customerName": "John Doe",
+  "phoneNumber": "1234567890"
+}
+
+### Get all Reservations
+GET http://localhost:8080/reservations
+
+### Create a Ticket
+POST http://localhost:8080/ticket
+Content-Type: application/json
+
+{
+  "showingId": 1,
+  "reservationId": 1,
+  "seatId": 1,
+  "price": 12.50
+}
+
+### Get all Tickets
+GET http://localhost:8080/ticket/tickets

@@ -1,7 +1,6 @@
 package org.example.kinograf.DTO;
 
-public record TheatreDTO(
-        Long theatreId,
+public record CreateTheatreRequest(
         String theatreName,
         int capacity
 ) {
