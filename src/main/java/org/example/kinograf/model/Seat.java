@@ -4,16 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-
 @Entity
 public class Seat {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seatId;
 
-    private Long theatreId;
     private int seatRow;
     private int seatNumber;
 
@@ -24,14 +21,12 @@ public class Seat {
     @OneToMany(mappedBy = "seat")
     private List<Ticket> tickets;
 
-    public Seat(long seatId, int seatRow, int seatNumber, long theatreId) {
-        this.seatId = seatId;
+    public Seat() {}
+
+    public Seat(int seatRow, int seatNumber, Theatre theatre) {
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
-        this.theatreId = theatreId;
-    }
-
-    public Seat() {
+        this.theatre = theatre;
     }
 
     public Long getSeatId() {
@@ -40,14 +35,6 @@ public class Seat {
 
     public void setSeatId(Long seatId) {
         this.seatId = seatId;
-    }
-
-    public Long getTheatreId() {
-        return theatreId;
-    }
-
-    public void setTheatreId(Long theatreId) {
-        this.theatreId = theatreId;
     }
 
     public int getSeatRow() {
@@ -64,5 +51,21 @@ public class Seat {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

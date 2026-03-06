@@ -8,11 +8,9 @@ public class SeatMapper {
     public static SeatDTO toDTO(Seat seat) {
         return new SeatDTO(
                 seat.getSeatId(),
-                seat.getTheatreId(),
+                seat.getTheatre().getTheatreId(),
                 seat.getSeatRow(),
                 seat.getSeatNumber()
         );
     }
-
-
 }
