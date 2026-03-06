@@ -2,6 +2,7 @@ package org.example.kinograf.controller;
 
 import org.example.kinograf.DTO.CreateTheatreRequest;
 import org.example.kinograf.DTO.TheatreDTO;
+import org.example.kinograf.DTO.UpdateTheatreRequest;
 import org.example.kinograf.service.TheatreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/home")
 public class HomeController {
     private final TheatreService theatreService;
 
@@ -46,7 +49,7 @@ public class HomeController {
     }
 
     @PutMapping("/theatres/{id}")
-    public ResponseEntity<TheatreDTO> updateTheatre(@PathVariable Long id, @RequestBody CreateTheatreRequest request) {
+    public ResponseEntity<TheatreDTO> updateTheatre(@PathVariable Long id, @RequestBody UpdateTheatreRequest request) {
         TheatreDTO saved = theatreService.updateTheatre(
                 id,
                 request.theatreName(),
