@@ -3,44 +3,50 @@ package org.example.kinograf.service;
 import org.example.kinograf.DTO.SeatDTO;
 import org.example.kinograf.mapper.SeatMapper;
 import org.example.kinograf.model.Seat;
+import org.example.kinograf.model.Theatre;
 import org.example.kinograf.repository.SeatRepository;
+import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class SeatService {
-    private final SeatRepository seatRepository;
 
-    public SeatService(SeatRepository seatRepository) {
+    private final SeatRepository seatRepository;
+    private final TheatreRepository theatreRepository;
+
+    public SeatService(SeatRepository seatRepository, TheatreRepository theatreRepository) {
         this.seatRepository = seatRepository;
+        this.theatreRepository = theatreRepository;
     }
 
-
     public List<SeatDTO> getAllSeats() {
-        return seatRepository.findAll().stream().map(SeatMapper::toDTO).toList();
+        return seatRepository.findAll()
+                .stream()
+                .map(SeatMapper::toDTO)
+                .toList();
     }
 
     public Optional<SeatDTO> getSeatBySeatId(Long seatId) {
-        Optional<Seat> seat = seatRepository.findById(seatId);
-
-        if (seat.isPresent()) {
-            return Optional.of(SeatMapper.toDTO(seat.get()));
-        }
-        return Optional.empty();
+        return seatRepository.findById(seatId)
+                .map(SeatMapper::toDTO);
     }
-
 
     public SeatDTO createSeat(
             Long theatreId,
             int seatRow,
             int seatNumber
     ) {
-        Seat seat = new Seat();
 
-        seat.setTheatreId(theatreId);
+        Theatre theatre = theatreRepository.findById(theatreId)
+                .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        Seat seat = new Seat();
         seat.setSeatRow(seatRow);
         seat.setSeatNumber(seatNumber);
+        seat.setTheatre(theatre);
 
         return SeatMapper.toDTO(seatRepository.save(seat));
     }
@@ -51,18 +57,18 @@ public class SeatService {
             int seatRow,
             int seatNumber
     ) {
-        Seat updated = seatRepository.findById(seatId).orElse(null);
 
-        if (updated == null) {
-            return null;
-        }
+        Seat seat = seatRepository.findById(seatId)
+                .orElseThrow(() -> new RuntimeException("Seat not found"));
 
-        updated.setSeatRow(seatRow);
-        updated.setSeatNumber(seatNumber);
-        updated.setTheatreId(theatreId);
-        updated.setSeatId(seatId);
+        Theatre theatre = theatreRepository.findById(theatreId)
+                .orElseThrow(() -> new RuntimeException("Theatre not found"));
 
-        return SeatMapper.toDTO(seatRepository.save(updated));
+        seat.setSeatRow(seatRow);
+        seat.setSeatNumber(seatNumber);
+        seat.setTheatre(theatre);
+
+        return SeatMapper.toDTO(seatRepository.save(seat));
     }
 
     public void deleteSeat(Long seatId) {
