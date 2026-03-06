@@ -1,10 +1,9 @@
 package org.example.kinograf.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Reservation {
@@ -14,6 +13,9 @@ public class Reservation {
     private long reservationId;
     private String customerName;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "reservation")
+    private List<Ticket> tickets;
 
     public long getReservationId() {
         return reservationId;
