@@ -4,11 +4,12 @@ import org.example.kinograf.DTO.TheatreDTO;
 import org.example.kinograf.mapper.TheatreMapper;
 import org.example.kinograf.model.Theatre;
 import org.example.kinograf.repository.TheatreRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class TheatreServiceImpl implements TheatreService {
 
 //    List<TheatreDTO> getAllTheatres();

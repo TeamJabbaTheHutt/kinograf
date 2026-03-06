@@ -1,10 +1,8 @@
 package org.example.kinograf.DTO;
 
-public record TicketDTO(
-        Long ticketId,
+public record UpdateTicketRequest(
         Long showingId,
         Long reservationId,
         Long seatId,
         double price
-) {
-}
+) {}
