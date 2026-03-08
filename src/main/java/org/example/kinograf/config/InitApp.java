@@ -2,22 +2,36 @@ package org.example.kinograf.config;
 
 import org.example.kinograf.model.Movie;
 import org.example.kinograf.model.Reservation;
+import org.example.kinograf.model.ShowTimes;
+import org.example.kinograf.model.Theatre;
 import org.example.kinograf.repository.MovieRepository;
 import org.example.kinograf.repository.ReservationRepository;
+import org.example.kinograf.repository.ShowtimeRepository;
+import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Configuration
 public class InitApp {
 
     @Bean
     CommandLineRunner initDatabase(MovieRepository movieRepository,
-                                   ReservationRepository reservationRepository) {
+                                   ReservationRepository reservationRepository, ShowtimeRepository showtimeRepository, TheatreRepository theatreRepository) {
 
         return args -> {
 
-            // Movies
+            if (theatreRepository.count() == 0) {
+                Theatre theatre = new Theatre();
+                theatre.setTheatreName("Opera");
+                theatre.setCapacity(25);
+                theatreRepository.save(theatre);
+            }
+
             if (movieRepository.count() == 0) {
 
                 Movie movie1 = new Movie();
@@ -43,7 +57,7 @@ public class InitApp {
             }
 
 
-            // Reservations
+
             if (reservationRepository.count() == 0) {
 
                 Reservation r1 = new Reservation();
@@ -63,6 +77,34 @@ public class InitApp {
                 reservationRepository.save(r3);
 
                 System.out.println("Reservations added to H2 database");
+            }
+
+            if (showtimeRepository.count() == 0) {
+
+
+                ShowTimes showtimes1 = new ShowTimes();
+                Optional<Movie> movieOpt1 = movieRepository.findById(1L);
+                showtimes1.setMovie(movieOpt1.get());
+                Optional<Theatre> theatreOpt1 = theatreRepository.findById(1L);
+                showtimes1.setTheatre(theatreOpt1.get());
+                showtimes1.setTimeOfDay(LocalDate.now());
+                showtimeRepository.save(showtimes1);
+
+
+                ShowTimes showtimes2 = new ShowTimes();
+                showtimes2.setMovie(movieOpt1.get());
+                showtimes2.setTheatre(theatreOpt1.get());
+                showtimes2.setTimeOfDay(LocalDate.now());
+                showtimeRepository.save(showtimes2);
+
+
+                ShowTimes showtimes3 = new ShowTimes();
+                Optional<Movie> movieOpt2 = movieRepository.findById(2L);
+                showtimes3.setMovie(movieOpt2.get());
+
+                showtimes3.setTheatre(theatreOpt1.get());
+                showtimes3.setTimeOfDay(LocalDate.now());
+                showtimeRepository.save(showtimes3);
             }
         };
     }
