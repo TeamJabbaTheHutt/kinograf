@@ -10,8 +10,11 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
-
+    private String imageURL;
     private String name;
+    private String description;
+    private String duration;
+    private String rating;
     private String categories;
     private int ageLimit;
 

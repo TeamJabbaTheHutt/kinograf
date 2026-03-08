@@ -19,10 +19,11 @@ public class HomeController {
         this.theatreService = theatreService;
     }
 
-
-
-
-
+    // For fetching info on movies to show on startpage
+    @GetMapping()
+    public String showHome() {
+        return "static/index";
+    }
 
     /// controller -> theatre, hvis vi mangler det
 

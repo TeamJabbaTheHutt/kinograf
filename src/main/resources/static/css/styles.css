@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url("../images/kinografBackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+}
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.btn {
+    justify-content: center;
+}
+
+.page-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+}
+
+.recommended-section {
+    background: #222;
+    height: 300px;
+    padding: 20px 40px;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.recommended-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 10px;
+}
+
+.recommended-header h2 {
+    color: white;
+    margin: 0;
+}
+
+.movie-cards {
+    position: absolute;
+    right: 40px;
+    top: 0;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: clamp(180px, 18vw, 250px);
+    aspect-ratio: 5 / 9;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    border-radius: 10px;
+    border: black;
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+}
