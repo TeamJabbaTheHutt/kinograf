@@ -31,3 +31,16 @@ export async function getShowTimes() {
     const res = await fetch(`${BASE_URL}/showTimes`);
     return await res.json();
 }
+
+export async function getSeats() {
+    const res = await fetch(`${BASE_URL}/seats`)
+    return await res.json();
+}
+export async function getReservations() {
+    const res = await fetch(`${BASE_URL}/reservations`)
+    return await res.json();
+}
+export async function getTickets() {
+    const res = await fetch(`${BASE_URL}/ticket/tickets`)
+    return await res.json();
+}

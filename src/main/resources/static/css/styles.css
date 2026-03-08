@@ -153,3 +153,35 @@ footer a {
     border-radius: 5px;
     width: 500px;
 }
+
+
+
+.seatsContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.seatDiv {
+    width: 35px;
+    height: 35px;
+    background-color: green;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.seatBottom {
+    width: 100%;
+    height: 8px;
+    background-color: lightgreen;
+}
+.bookSeatFormDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+

@@ -1,13 +1,7 @@
 package org.example.kinograf.config;
 
-import org.example.kinograf.model.Movie;
-import org.example.kinograf.model.Reservation;
-import org.example.kinograf.model.ShowTimes;
-import org.example.kinograf.model.Theatre;
-import org.example.kinograf.repository.MovieRepository;
-import org.example.kinograf.repository.ReservationRepository;
-import org.example.kinograf.repository.ShowtimeRepository;
-import org.example.kinograf.repository.TheatreRepository;
+import org.example.kinograf.model.*;
+import org.example.kinograf.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,91 +15,91 @@ public class InitApp {
 
     @Bean
     CommandLineRunner initDatabase(MovieRepository movieRepository,
-                                   ReservationRepository reservationRepository, ShowtimeRepository showtimeRepository, TheatreRepository theatreRepository) {
+                                   ReservationRepository reservationRepository, ShowtimeRepository showtimeRepository,
+                                   TheatreRepository theatreRepository,
+                                   TicketRepository ticketRepository,
+                                   SeatRepository seatRepository) {
 
         return args -> {
+            Theatre theatre = new Theatre();
+            theatre.setTheatreName("Opera");
+            theatre.setCapacity(25);
+            theatre = theatreRepository.save(theatre);
 
-            if (theatreRepository.count() == 0) {
-                Theatre theatre = new Theatre();
-                theatre.setTheatreName("Opera");
-                theatre.setCapacity(25);
-                theatreRepository.save(theatre);
-            }
+            Movie movie1 = new Movie();
+            movie1.setName("Dune");
+            movie1.setCategories("Sci-Fi");
+            movie1.setAgeLimit(15);
 
-            if (movieRepository.count() == 0) {
+            Movie movie2 = new Movie();
+            movie2.setName("Batman");
+            movie2.setCategories("Action");
+            movie2.setAgeLimit(13);
 
-                Movie movie1 = new Movie();
-                movie1.setName("Dune");
-                movie1.setCategories("Sci-Fi");
-                movie1.setAgeLimit(15);
+            Movie movie3 = new Movie();
+            movie3.setName("Frozen");
+            movie3.setCategories("Animation");
+            movie3.setAgeLimit(7);
 
-                Movie movie2 = new Movie();
-                movie2.setName("Batman");
-                movie2.setCategories("Action");
-                movie2.setAgeLimit(13);
-
-                Movie movie3 = new Movie();
-                movie3.setName("Frozen");
-                movie3.setCategories("Animation");
-                movie3.setAgeLimit(7);
-
-                movieRepository.save(movie1);
-                movieRepository.save(movie2);
-                movieRepository.save(movie3);
-
-                System.out.println("Movies added to H2 database");
-            }
+            movie1 = movieRepository.save(movie1);
+            movie2 = movieRepository.save(movie2);
+            movie3 = movieRepository.save(movie3);
 
 
 
-            if (reservationRepository.count() == 0) {
 
-                Reservation r1 = new Reservation();
-                r1.setCustomerName("John Doe");
-                r1.setPhoneNumber("12345678");
+            Reservation r1 = new Reservation();
+            r1.setCustomerName("John Doe");
+            r1.setPhoneNumber("12345678");
 
-                Reservation r2 = new Reservation();
-                r2.setCustomerName("Jane Smith");
-                r2.setPhoneNumber("87654321");
+            Reservation r2 = new Reservation();
+            r2.setCustomerName("Jane Smith");
+            r2.setPhoneNumber("87654321");
 
-                Reservation r3 = new Reservation();
-                r3.setCustomerName("Peter Parker");
-                r3.setPhoneNumber("11223344");
+            Reservation r3 = new Reservation();
+            r3.setCustomerName("Peter Parker");
+            r3.setPhoneNumber("11223344");
 
-                reservationRepository.save(r1);
-                reservationRepository.save(r2);
-                reservationRepository.save(r3);
-
-                System.out.println("Reservations added to H2 database");
-            }
-
-            if (showtimeRepository.count() == 0) {
+            r1 = reservationRepository.save(r1);
+            r2 = reservationRepository.save(r2);
+            r3 = reservationRepository.save(r3);
 
 
-                ShowTimes showtimes1 = new ShowTimes();
-                Optional<Movie> movieOpt1 = movieRepository.findById(1L);
-                showtimes1.setMovie(movieOpt1.get());
-                Optional<Theatre> theatreOpt1 = theatreRepository.findById(1L);
-                showtimes1.setTheatre(theatreOpt1.get());
-                showtimes1.setTimeOfDay(LocalDate.now());
-                showtimeRepository.save(showtimes1);
 
 
-                ShowTimes showtimes2 = new ShowTimes();
-                showtimes2.setMovie(movieOpt1.get());
-                showtimes2.setTheatre(theatreOpt1.get());
-                showtimes2.setTimeOfDay(LocalDate.now());
-                showtimeRepository.save(showtimes2);
+            ShowTimes st1 = new ShowTimes();
+            st1.setMovie(movie1);
+            st1.setTheatre(theatre);
+            st1.setTimeOfDay(LocalDate.now());
+            st1 = showtimeRepository.save(st1);
+
+            ShowTimes st2 = new ShowTimes();
+            st2.setMovie(movie1);
+            st2.setTheatre(theatre);
+            st2.setTimeOfDay(LocalDate.now());
+            st2 = showtimeRepository.save(st2);
+
+            ShowTimes st3 = new ShowTimes();
+            st3.setMovie(movie2);
+            st3.setTheatre(theatre);
+            st3.setTimeOfDay(LocalDate.now());
+            st3 = showtimeRepository.save(st3);
+
+            Seat seat1 = new Seat();
+            seat1.setSeatNumber(10);
+            seat1.setSeatRow(10);
+            seat1.setTheatre(theatre);
+            seat1 = seatRepository.save(seat1);
 
 
-                ShowTimes showtimes3 = new ShowTimes();
-                Optional<Movie> movieOpt2 = movieRepository.findById(2L);
-                showtimes3.setMovie(movieOpt2.get());
 
-                showtimes3.setTheatre(theatreOpt1.get());
-                showtimes3.setTimeOfDay(LocalDate.now());
-                showtimeRepository.save(showtimes3);
-            }
+
+            Ticket ticket = new Ticket();
+            ticket.setPrice(100);
+            ticket.setReservation(r1);
+            ticket.setSeat(seat1);
+            ticket.setShowTimes(st1);
+            ticketRepository.save(ticket);
         };
     }
 }
