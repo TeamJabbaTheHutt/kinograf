@@ -116,7 +116,7 @@ function renderBookSeatForm(container, selectedSeats, item) {
 }
 export async function bookSeats(mainContainer, selectedSeats, item, name, phonenumber, seatsFromDB) {
     try {
-        // 1. Create reservation
+
         const res = await fetch(`${BASE_URL}/reservations`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -128,11 +128,11 @@ export async function bookSeats(mainContainer, selectedSeats, item, name, phonen
             return;
         }
 
-        const reservation = await res.json(); // contains reservationId
+        const reservation = await res.json();
 
-        // 2. Create tickets for each seat
+
         for (const seatNumber of selectedSeats) {
-            // find the real seatId from DB using theatreId and seat number
+
             const seat = seatsFromDB.find(s => s.theatreId === item.theatreId && s.seatNumber === seatNumber);
             if (!seat) {
                 console.warn("Seat not found in DB:", seatNumber);
@@ -153,10 +153,10 @@ export async function bookSeats(mainContainer, selectedSeats, item, name, phonen
 
         console.log("Seats booked successfully");
 
-        // Clear selected seats
+
         selectedSeats.length = 0;
 
-        // Re-render the showtime seats
+
         await renderShowtimeSeats(mainContainer, item);
 
     } catch (err) {
