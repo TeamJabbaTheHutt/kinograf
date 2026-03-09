@@ -14,4 +14,9 @@ public class AdminHomeController {
         return new RedirectView("/html/adminHomepage.html");
     }
 
+    @GetMapping("/addMovie")
+    public RedirectView showAddMovie() {
+        return new RedirectView("/html/addMovie.html");
+    }
+
 }

@@ -122,3 +122,15 @@ footer a {
     margin-top: 15vh;
 }
 
+#searchResults div {
+    cursor: pointer;
+}
+
+#searchResults div:hover {
+    background-color: #f0f0f0;
+}
+
+.card-img {
+    object-fit: cover;
+    height: 100%;
+}
