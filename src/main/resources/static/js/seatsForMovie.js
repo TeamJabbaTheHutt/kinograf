@@ -175,27 +175,22 @@ export async function renderShowtimeSeats(main, item) {
     const theatres = await getTheatres();
     const seats = await getSeats();
 
-    // Tickets for this showtime
     const ticketsForShowtime = tickets.filter(
         ticket => ticket.showingId === showtime.showTimesId
     );
 
-    // Find theatre
     const theatre = theatres.find(
         t => t.theatreId === showtime.theatreId
     );
 
-    // Reserved seat ids
     const reservedSeatIds = ticketsForShowtime.map(ticket => ticket.seatId);
 
-    // Reserved seat objects
     const reservedSeats = seats.filter(seat =>
         reservedSeatIds.includes(seat.seatId)
     );
 
     const selectedSeats = [];
 
-    // Create grid
     const grid = [];
 
     for (let row = 1; row <= theatre.rowsInTheatre; row++) {
@@ -226,7 +221,6 @@ export async function renderShowtimeSeats(main, item) {
     const bookingContainer = document.createElement("div");
     bookingContainer.classList.add("booking-container");
 
-    // Render seats
     grid.forEach(row => {
         const rowDiv = document.createElement("div");
         rowDiv.classList.add("seat-row");
@@ -330,4 +324,64 @@ function renderBookSeatForm(container, selectedSeats, item) {
 
         await bookSeats(container, selectedSeats, item, name, phonenumber);
     });
+}
+
+async function bookSeats(container, selectedSeats, item, name, phonenumber) {
+
+    try {
+        const res = await fetch(`${BASE_URL}/reservations`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ customerName: name, phonenumber: phonenumber })
+        });
+
+        if (!res.ok) {
+            console.error("Failed to create reservation");
+            return;
+        }
+
+        const reservation = await res.json();
+
+        for (const seatLabel of selectedSeats) {
+            const [row, seatNumber] = seatLabel.split("-").map(Number);
+
+            // 2a️⃣ Create the seat
+            const createSeatRes = await fetch(`${BASE_URL}/seats`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    theatreId: item.theatreId,
+                    rowNumber: row,
+                    seatNumber: seatNumber
+                })
+            });
+
+            if (!createSeatRes.ok) {
+                console.error("Failed to create seat:", row, seatNumber);
+                continue;
+            }
+
+            const seat = await createSeatRes.json();
+
+            const ticketRes = await fetch(`${BASE_URL}/ticket/ticket`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    showingId: Number(item.showTimesId),
+                    seatId: Number(seat.seatId),
+                    reservationId: Number(reservation.reservationId),
+                    price: 100
+                })
+            });
+
+            if (!ticketRes.ok) {
+                console.error("Failed to create ticket for seat:", row, seatNumber);
+            }
+        }
+
+        container.innerHTML = "<h2 style='color:white;'>Seats successfully booked!</h2>";
+
+    } catch (err) {
+        console.error("Error making reservation:", err);
+    }
 }
