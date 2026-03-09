@@ -24,6 +24,8 @@ public class InitApp {
             Theatre theatre = new Theatre();
             theatre.setTheatreName("Opera");
             theatre.setCapacity(25);
+            theatre.setRowsInTheatre(20); // rows y
+            theatre.setSeatsInTheatre(12); // columns x
             theatre = theatreRepository.save(theatre);
 
             Movie movie1 = new Movie();
@@ -86,8 +88,8 @@ public class InitApp {
             st3 = showtimeRepository.save(st3);
 
             Seat seat1 = new Seat();
-            seat1.setSeatNumber(10);
-            seat1.setSeatRow(10);
+            seat1.setSeatNumber(5);
+            seat1.setSeatRow(5);
             seat1.setTheatre(theatre);
             seat1 = seatRepository.save(seat1);
 

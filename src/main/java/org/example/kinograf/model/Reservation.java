@@ -10,18 +10,18 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long reservationId;
+    private Long reservationId;
     private String customerName;
     private String phoneNumber;
 
     @OneToMany(mappedBy = "reservation")
     private List<Ticket> tickets;
 
-    public long getReservationId() {
+    public Long getReservationId() {
         return reservationId;
     }
 
-    public void setReservationId(long reservationId) {
+    public void setReservationId(Long reservationId) {
         this.reservationId = reservationId;
     }
 
