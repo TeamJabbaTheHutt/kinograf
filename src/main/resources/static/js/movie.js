@@ -5,7 +5,7 @@ document.getElementById("movieSearch").addEventListener("input", () => {
     timer = setTimeout(searchMovies, 300);
 });
 async function searchMovies(){
-    const apiKey = "b9c41db5"; // replace with your OMDb API key
+    const apiKey = "b9c41db5";
     const query = document.getElementById("movieSearch").value;
 
     if (query.length < 3) return;
