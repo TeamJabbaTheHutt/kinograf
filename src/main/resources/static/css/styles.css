@@ -172,3 +172,32 @@ footer a {
 .selected {
     background-color: yellow;
 }
+.option-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 100vw;
+    min-width: 5vw;
+    color: white;
+
+}
+
+.option-buttons a {
+    height: 100px;
+    width: 90vw;
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 16px;
+}
+
+.admin-page-content {
+    justify-content: center;
+    align-items: center;
+    margin-top: 15vh;
+}
+

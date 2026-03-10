@@ -6,6 +6,7 @@ import org.example.kinograf.DTO.UpdateTheatreRequest;
 import org.example.kinograf.service.TheatreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,8 @@ public class HomeController {
 
     // For fetching info on movies to show on startpage
     @GetMapping()
-    public String showHome() {
-        return "static/index";
+    public RedirectView showHome() {
+        return new RedirectView( "/html/index.html");
     }
 
     /// controller -> theatre, hvis vi mangler det
