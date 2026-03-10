@@ -11,7 +11,7 @@ export async function renderViewSchedule(mainContainer) {
     mainContainer.classList.add("viewSchedule-body");
 
 
-    const isAdmin = true;
+    // const isAdmin = true;
 
 
     const allMovies = await getMovies();
@@ -21,9 +21,9 @@ export async function renderViewSchedule(mainContainer) {
 
     let htmlContent = `<div class="movies-container">`;
 
-    if (isAdmin) {
-        htmlContent += `<div style="text-align:center;"><h1>Administration</h1></div>`;
-    }
+    // if (isAdmin) {
+    //     htmlContent += `<div style="text-align:center;"><h1>Administration</h1></div>`;
+    // }
 
 
     for (let movie of allMovies) {
@@ -40,17 +40,17 @@ export async function renderViewSchedule(mainContainer) {
                 htmlContent += `<p class="showtimeClick" data-id="${showtime.showTimesId}" style="margin-left:20px; color:white; cursor:pointer;">
                 Theatre: ${theatre ? theatre.theatreName : "No Theatre name"},
                 Time: ${showtime.timeOfDay ?? "No Time"},
-                Capacity: ${theatre ? theatre.capacity : "No Capacity"}
-                ${isAdmin ? `<span class="deleteShowtime" data-id="${showtime.showTimesId}" style="color:red; cursor:pointer; margin-left:10px;">X</span>` : ""}
+                Capacity: ${theatre ? theatre.capacity : "No Capacity"}, 
             </p>`;
             });
         }
 
 
+        // ${isAdmin ? `<span class="deleteShowtime" data-id="${showtime.showTimesId}" style="color:red; cursor:pointer; margin-left:10px;">X</span>` : ""}
 
-        if (isAdmin) {
-            htmlContent += `<button class="addTimeAndHallBtn" data-id="${movie.movieId}" >Add time and hall</button>`;
-        }
+        // if (isAdmin) {
+        //     htmlContent += `<button class="addTimeAndHallBtn" data-id="${movie.movieId}" >Add time and hall</button>`;
+        // }
     }
 
     htmlContent += `</div>`;
