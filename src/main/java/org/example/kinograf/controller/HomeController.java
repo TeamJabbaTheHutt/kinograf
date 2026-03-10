@@ -45,7 +45,9 @@ public class HomeController {
     public ResponseEntity<TheatreDTO>  createTheatre(@RequestBody CreateTheatreRequest request) {
         TheatreDTO saved = theatreService.createTheatre(
                 request.theatreName(),
-                request.capacity()
+                request.capacity(),
+                request.rowsInTheatre(),
+                request.seatsInTheatre()
         );
         return ResponseEntity.ok(saved);
     }
@@ -55,7 +57,9 @@ public class HomeController {
         TheatreDTO saved = theatreService.updateTheatre(
                 id,
                 request.theatreName(),
-                request.capacity()
+                request.capacity(),
+                request.rowsInTheatre(),
+                request.seatsInTheatre()
         );
         return ResponseEntity.ok(saved);
     }

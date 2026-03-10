@@ -20,11 +20,32 @@ public class Theatre {
     @OneToMany(mappedBy = "theatre")
     private List<ShowTimes> showtimes;
 
+    private int rowsInTheatre;
+    private int seatsInTheatre;
+
     public Theatre() {}
 
-    public Theatre(String theatreName, int capacity) {
+    public Theatre(String theatreName, int capacity, int rowsInTheatre, int seatsInTheatre) {
         this.theatreName = theatreName;
         this.capacity = capacity;
+        this.rowsInTheatre = rowsInTheatre;
+        this.seatsInTheatre = seatsInTheatre;
+    }
+
+    public int getRowsInTheatre() {
+        return rowsInTheatre;
+    }
+
+    public void setRowsInTheatre(int rowsInTheatre) {
+        this.rowsInTheatre = rowsInTheatre;
+    }
+
+    public int getSeatsInTheatre() {
+        return seatsInTheatre;
+    }
+
+    public void setSeatsInTheatre(int seatsInTheatre) {
+        this.seatsInTheatre = seatsInTheatre;
     }
 
     public Long getTheatreId() {

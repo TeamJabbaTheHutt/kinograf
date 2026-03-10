@@ -60,20 +60,24 @@ public class TheatreServiceImpl implements TheatreService {
 //    TheatreDTO updateTheatre(TheatreDTO theatreDTO);
 //    void deleteTheatre(int theatreId);
     @Override
-    public TheatreDTO createTheatre(String theatreName, int capacity) {
+    public TheatreDTO createTheatre(String theatreName, int capacity, int rowsInTheatre, int seatsInTheatre) {
         Theatre theatre = new Theatre();
         theatre.setTheatreName(theatreName);
         theatre.setCapacity(capacity);
+        theatre.setRowsInTheatre(rowsInTheatre);
+        theatre.setSeatsInTheatre(seatsInTheatre);
 
         Theatre saved = theatreRepository.save(theatre);
         return TheatreMapper.toDTO(saved);
     }
 
     @Override
-    public TheatreDTO updateTheatre(Long id, String theatreName, int capacity) {
+    public TheatreDTO updateTheatre(Long id, String theatreName, int capacity, int rowsInTheatre, int seatsInTheatre) {
         Theatre existing = theatreRepository.findById(id).get();
         existing.setTheatreName(theatreName);
         existing.setCapacity(capacity);
+        existing.setRowsInTheatre(rowsInTheatre);
+        existing.setSeatsInTheatre(seatsInTheatre);
         return TheatreMapper.toDTO(theatreRepository.save(existing));
     }
 
