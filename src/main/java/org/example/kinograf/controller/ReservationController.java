@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 @RestController
+@RequestMapping("/reservations")
 public class ReservationController {
     private final ReservationService reservationService;
 
@@ -20,12 +21,12 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/reservations")
+    @GetMapping("")
     public List<ReservationDTO> getReservations() {
         return reservationService.getAllReservations();
     }
 
-    @GetMapping("/reservations/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ReservationDTO> getReservationById(@PathVariable long id) {
         Optional<ReservationDTO> reservation = reservationService.getReservationById(id);
         if (reservation.isPresent()) {
@@ -34,7 +35,7 @@ public class ReservationController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/reservation")
+    @PostMapping()
     public ResponseEntity<ReservationDTO> addReservation(@RequestBody CreateReservationRequest request) {
         ReservationDTO saved = reservationService.createReservation(
                 request.customerName(),
@@ -43,7 +44,7 @@ public class ReservationController {
         return ResponseEntity.ok(saved);
     }
 
-    @PutMapping("/reservations/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ReservationDTO> updateReservation(@PathVariable long id, @RequestBody UpdateReservationRequest request) {
         ReservationDTO update = reservationService.updateReservation(
                 id,
@@ -53,7 +54,7 @@ public class ReservationController {
         return ResponseEntity.ok(update);
     }
 
-    @DeleteMapping("/reservations/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable long id) {
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();

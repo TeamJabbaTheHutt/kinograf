@@ -93,6 +93,85 @@ footer a {
     object-fit: cover;
 }
 
+.viewSchedule-body {
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+
+    background: linear-gradient(to right, #000000, #737373);
+}
+
+.movies-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.movie-card {
+    background: #222;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.movie-card h2 {
+    margin: 0;
+}
+
+.addTimeAndHallBtn {
+    width: 150px;
+    color: white;
+    background-color: #a2c78d;
+    border-radius: 50px;
+    border-color: transparent;
+}
+
+.createBtn {
+    width: 150px;
+    color: white;
+    background-color: #0097b2;
+    border-radius: 50px;
+    border-color: transparent;
+}
+.cancelBtn {
+    width: 150px;
+    color: white;
+    background-color: #b20000;
+    border-radius: 50px;
+    border-color: transparent;
+}
+
+.formLayout {
+
+    border: 1px solid white;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    width: 500px;
+}
+
+
+.seat-row {
+    justify-content: center;
+    align-content: center;
+
+}
+.seat {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+}
+
+.reserved {
+    background-color: red;
+}
+.selected {
+    background-color: yellow;
+}
 .option-buttons {
     display: flex;
     flex-direction: column;

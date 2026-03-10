@@ -9,7 +9,9 @@ public class TheatreMapper {
         return new TheatreDTO(
                 theatre.getTheatreId(),
                 theatre.getTheatreName(),
-                theatre.getCapacity()
+                theatre.getCapacity(),
+                theatre.getRowsInTheatre(),
+                theatre.getSeatsInTheatre()
         );
     }
 
@@ -18,6 +20,8 @@ public class TheatreMapper {
         theatre.setTheatreId(theatreDTO.theatreId());
         theatre.setTheatreName(theatreDTO.theatreName());
         theatre.setCapacity(theatreDTO.capacity());
+        theatre.setRowsInTheatre(theatreDTO.rowsInTheatre());
+        theatre.setSeatsInTheatre(theatreDTO.seatsInTheatre());
         return theatre;
     }
 }
