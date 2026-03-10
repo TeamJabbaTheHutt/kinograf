@@ -117,6 +117,8 @@ footer a {
 }
 
 .admin-page-content {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 15vh;
@@ -124,13 +126,22 @@ footer a {
 
 #searchResults div {
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 #searchResults div:hover {
     background-color: #f0f0f0;
 }
 
+#movieDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-img {
+    margin-top: 10px;
     object-fit: cover;
     height: 100%;
 }
