@@ -30,18 +30,20 @@ public class InitApp {
 
             Movie movie1 = new Movie();
             movie1.setName("Dune");
-            movie1.setCategories("Sci-Fi");
-            movie1.setAgeLimit(15);
+            movie1.setOmdbID("tt1160419"); // Dune (2021)
 
             Movie movie2 = new Movie();
             movie2.setName("Batman");
-            movie2.setCategories("Action");
-            movie2.setAgeLimit(13);
+            movie2.setOmdbID("tt1877830"); // The Batman (2022)
 
             Movie movie3 = new Movie();
             movie3.setName("Frozen");
-            movie3.setCategories("Animation");
-            movie3.setAgeLimit(7);
+            movie3.setOmdbID("tt2294629"); // Frozen (2013)
+
+            movie1 = movieRepository.save(movie1);
+            movie2 = movieRepository.save(movie2);
+            movie3 = movieRepository.save(movie3);
+
 
             movie1 = movieRepository.save(movie1);
             movie2 = movieRepository.save(movie2);

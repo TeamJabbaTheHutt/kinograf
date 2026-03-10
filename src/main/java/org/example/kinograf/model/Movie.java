@@ -10,24 +10,21 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
-    private String imageURL;
+
     private String name;
-    private String description;
-    private String duration;
-    private String rating;
-    private String categories;
-    private int ageLimit;
+    private String omdbID;
 
     @OneToMany(mappedBy = "movie")
     private List<ShowTimes> showTimes;
 
+
     public Movie() {
     }
 
-    public Movie(String name, String categories, int ageLimit) {
+    public Movie(Long movieId, String name, String omdbID) {
+        this.movieId = movieId;
         this.name = name;
-        this.categories = categories;
-        this.ageLimit = ageLimit;
+        this.omdbID = omdbID;
     }
 
     public Long getMovieId() {
@@ -46,20 +43,12 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategories() {
-        return categories;
+    public String getOmdbID() {
+        return omdbID;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public int getAgeLimit() {
-        return ageLimit;
-    }
-
-    public void setAgeLimit(int ageLimit) {
-        this.ageLimit = ageLimit;
+    public void setOmdbID(String omdbID) {
+        this.omdbID = omdbID;
     }
 
     public List<ShowTimes> getShowTimes() {

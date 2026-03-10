@@ -39,8 +39,7 @@ public class MovieController {
     public ResponseEntity<MovieDTO> createMovie(@RequestBody CreateMovieRequest request) {
         MovieDTO created = movieService.createMovie(
                 request.name(),
-                request.categories(),
-                request.ageLimit()
+                request.omdbID()
         );
         return ResponseEntity.ok(created);
     }
@@ -50,8 +49,7 @@ public class MovieController {
         MovieDTO updated = movieService.updateMovie(
                 id,
                 request.name(),
-                request.categories(),
-                request.ageLimit()
+                request.omdbID()
         );
         return ResponseEntity.ok(updated);
     }
