@@ -37,14 +37,12 @@ public class MovieService {
 
     public MovieDTO createMovie(
             String name,
-            String categories,
-            int ageLimit
+            String omdbID
     ) {
         Movie movie = new Movie();
 
         movie.setName(name);
-        movie.setCategories(categories);
-        movie.setAgeLimit(ageLimit);
+        movie.setOmdbID(omdbID);
 
         return MovieMapper.toDTO(movieRepository.save(movie));
     }
@@ -52,8 +50,7 @@ public class MovieService {
     public MovieDTO updateMovie(
             Long movieId,
             String name,
-            String categories,
-            int ageLimit
+            String omdbID
     ) {
         Movie updated = movieRepository.findById(movieId).orElse(null);
 
@@ -62,8 +59,7 @@ public class MovieService {
         }
 
         updated.setName(name);
-        updated.setCategories(categories);
-        updated.setAgeLimit(ageLimit);
+        updated.setOmdbID(omdbID);
 
         return MovieMapper.toDTO(movieRepository.save(updated));
     }
