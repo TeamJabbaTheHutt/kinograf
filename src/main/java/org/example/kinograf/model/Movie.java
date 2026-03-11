@@ -11,25 +11,20 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
 
-    private String omdbID;
-    private String imageURL;
     private String name;
-    private String description;
-    private String duration;
-    private String rating;
-    private String categories;
-    private int ageLimit;
+    private String omdbID;
 
     @OneToMany(mappedBy = "movie")
     private List<ShowTimes> showTimes;
 
+
     public Movie() {
     }
 
-    public Movie(String name, String categories, int ageLimit) {
+    public Movie(Long movieId, String name, String omdbID) {
+        this.movieId = movieId;
         this.name = name;
-        this.categories = categories;
-        this.ageLimit = ageLimit;
+        this.omdbID = omdbID;
     }
 
     public Long getMovieId() {
@@ -40,46 +35,6 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public String getOmdbID() {
-        return omdbID;
-    }
-
-    public void setOmdbID(String omdbID) {
-        this.omdbID = omdbID;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,20 +43,12 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategories() {
-        return categories;
+    public String getOmdbID() {
+        return omdbID;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public int getAgeLimit() {
-        return ageLimit;
-    }
-
-    public void setAgeLimit(int ageLimit) {
-        this.ageLimit = ageLimit;
+    public void setOmdbID(String omdbID) {
+        this.omdbID = omdbID;
     }
 
     public List<ShowTimes> getShowTimes() {

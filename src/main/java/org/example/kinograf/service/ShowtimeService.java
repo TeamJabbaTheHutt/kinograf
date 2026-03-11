@@ -11,6 +11,8 @@ import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,14 @@ public class ShowtimeService {
     }
 
     public List<ShowTimesDTO> getALlShowTimes() {
-        return showtimeRepository.findAll().stream().map(ShowTimesMapper::toDTO).toList();
+        List<ShowTimes> showTimes = showtimeRepository.findAll();
+        List<ShowTimesDTO> dtos = new ArrayList<>();
+
+        for (ShowTimes showtimes : showTimes) {
+            dtos.add(ShowTimesMapper.toDTO(showtimes));
+        }
+        return dtos;
+
     }
 
     public Optional<ShowTimesDTO> getShowTimesById(Long id) {
@@ -39,13 +48,15 @@ public class ShowtimeService {
         return Optional.empty();
     }
 
-    public ShowTimesDTO createShowTimes(Long movieId, Long theatreId, LocalDate timeOfDay) {
+    public ShowTimesDTO createShowTimes(Long movieId, Long theatreId, LocalDateTime timeOfDay) {
 
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
 
         Theatre theatre = theatreRepository.findById(theatreId)
                 .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        timeOfDay = timeOfDay.withSecond(0).withNano(0);
 
         ShowTimes showTimes = new ShowTimes();
         showTimes.setMovie(movie);
@@ -61,7 +72,7 @@ public class ShowtimeService {
             Long showTimesId,
             Long movieId,
             Long theatreId,
-            LocalDate timeOfDay
+            LocalDateTime timeOfDay
     ) {
 
         ShowTimes updated = showtimeRepository.findById(showTimesId).orElse(null);
@@ -75,6 +86,8 @@ public class ShowtimeService {
 
         Theatre theatre = theatreRepository.findById(theatreId)
                 .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        timeOfDay = timeOfDay.withSecond(0).withNano(0);
 
         updated.setMovie(movie);
         updated.setTheatre(theatre);

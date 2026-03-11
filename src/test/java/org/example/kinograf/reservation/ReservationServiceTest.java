@@ -1,11 +1,9 @@
 package org.example.kinograf.reservation;
 
 import org.example.kinograf.DTO.ReservationDTO;
-import org.example.kinograf.DTO.UpdateReservationRequest;
 import org.example.kinograf.model.Reservation;
 import org.example.kinograf.repository.ReservationRepository;
-import org.example.kinograf.service.ReservationMapper;
-import org.example.kinograf.service.ReservationService;
+import org.example.kinograf.mapper.ReservationMapper;
 import org.example.kinograf.service.ReservationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +14,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReservationServiceTest {
 

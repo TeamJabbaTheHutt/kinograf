@@ -1,4 +1,4 @@
-package org.example.kinograf.service;
+package org.example.kinograf.mapper;
 
 import org.example.kinograf.DTO.ReservationDTO;
 import org.example.kinograf.model.Reservation;

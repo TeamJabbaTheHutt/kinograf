@@ -1,6 +1,6 @@
 package org.example.kinograf.mapper;
 
-import org.example.kinograf.DTO.CreateMovieRequest;
+import org.example.kinograf.DTO.createRequest.CreateMovieRequest;
 import org.example.kinograf.DTO.MovieDTO;
 import org.example.kinograf.model.Movie;
 
@@ -10,16 +10,16 @@ public class MovieMapper {
         return new MovieDTO(
                 movie.getMovieId(),
                 movie.getName(),
-                movie.getCategories(),
-                movie.getAgeLimit()
+                movie.getOmdbID()
+
         );
     }
 
     public static Movie toEntity(CreateMovieRequest request) {
         Movie movie = new Movie();
         movie.setName(request.name());
-        movie.setCategories(request.categories());
-        movie.setAgeLimit(request.ageLimit());
+        movie.setOmdbID(request.omdbID());
+
 
         return movie;
     }

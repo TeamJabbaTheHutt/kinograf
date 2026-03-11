@@ -3,6 +3,7 @@ package org.example.kinograf.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class ShowTimes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long showTimesId;
 
-    private LocalDate timeOfDay;
+    private LocalDateTime timeOfDay;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
@@ -27,7 +28,7 @@ public class ShowTimes {
 
     public ShowTimes() {}
 
-    public ShowTimes(Movie movie, Theatre theatre, LocalDate timeOfDay) {
+    public ShowTimes(Movie movie, Theatre theatre, LocalDateTime timeOfDay) {
         this.movie = movie;
         this.theatre = theatre;
         this.timeOfDay = timeOfDay;
@@ -41,11 +42,11 @@ public class ShowTimes {
         this.showTimesId = showTimesId;
     }
 
-    public LocalDate getTimeOfDay() {
+    public LocalDateTime getTimeOfDay() {
         return timeOfDay;
     }
 
-    public void setTimeOfDay(LocalDate timeOfDay) {
+    public void setTimeOfDay(LocalDateTime timeOfDay) {
         this.timeOfDay = timeOfDay;
     }
 

@@ -6,6 +6,7 @@ import org.example.kinograf.model.Movie;
 import org.example.kinograf.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,14 @@ public class MovieService {
     }
 
     public List<MovieDTO> getAllMovies() {
-        return movieRepository.findAll()
-                .stream()
-                .map(MovieMapper::toDTO)
-                .toList();
+        List<Movie> movies = movieRepository.findAll();
+        List<MovieDTO> dtos = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            dtos.add(MovieMapper.toDTO(movie));
+        }
+        return dtos;
+
     }
 
     public Optional<MovieDTO> getMovieById(Long id) {
@@ -37,14 +42,12 @@ public class MovieService {
 
     public MovieDTO createMovie(
             String name,
-            String categories,
-            int ageLimit
+            String omdbID
     ) {
         Movie movie = new Movie();
 
         movie.setName(name);
-        movie.setCategories(categories);
-        movie.setAgeLimit(ageLimit);
+        movie.setOmdbID(omdbID);
 
         return MovieMapper.toDTO(movieRepository.save(movie));
     }
@@ -52,8 +55,7 @@ public class MovieService {
     public MovieDTO updateMovie(
             Long movieId,
             String name,
-            String categories,
-            int ageLimit
+            String omdbID
     ) {
         Movie updated = movieRepository.findById(movieId).orElse(null);
 
@@ -62,8 +64,7 @@ public class MovieService {
         }
 
         updated.setName(name);
-        updated.setCategories(categories);
-        updated.setAgeLimit(ageLimit);
+        updated.setOmdbID(omdbID);
 
         return MovieMapper.toDTO(movieRepository.save(updated));
     }

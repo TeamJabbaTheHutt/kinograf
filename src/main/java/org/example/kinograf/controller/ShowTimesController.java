@@ -1,13 +1,12 @@
 package org.example.kinograf.controller;
 
-import org.example.kinograf.DTO.CreateShowTimeRequest;
+import org.example.kinograf.DTO.createRequest.CreateShowTimeRequest;
 import org.example.kinograf.DTO.ShowTimesDTO;
-import org.example.kinograf.DTO.UpdateShowTimeRequest;
+import org.example.kinograf.DTO.updateRequest.UpdateShowTimeRequest;
 import org.example.kinograf.service.ShowtimeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 

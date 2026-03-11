@@ -2,8 +2,8 @@ package org.example.kinograf.controller;
 
 
 import org.example.kinograf.DTO.SeatDTO;
-import org.example.kinograf.DTO.CreateSeatRequest;
-import org.example.kinograf.DTO.UpdateSeatRequest;
+import org.example.kinograf.DTO.createRequest.CreateSeatRequest;
+import org.example.kinograf.DTO.updateRequest.UpdateSeatRequest;
 import org.example.kinograf.service.SeatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

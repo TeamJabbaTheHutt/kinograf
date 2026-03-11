@@ -30,18 +30,20 @@ public class InitApp {
 
             Movie movie1 = new Movie();
             movie1.setName("Dune");
-            movie1.setCategories("Sci-Fi");
-            movie1.setAgeLimit(15);
+            movie1.setOmdbID("tt1160419"); // Dune (2021)
 
             Movie movie2 = new Movie();
             movie2.setName("Batman");
-            movie2.setCategories("Action");
-            movie2.setAgeLimit(13);
+            movie2.setOmdbID("tt1877830"); // The Batman (2022)
 
             Movie movie3 = new Movie();
             movie3.setName("Frozen");
-            movie3.setCategories("Animation");
-            movie3.setAgeLimit(7);
+            movie3.setOmdbID("tt2294629"); // Frozen (2013)
+
+            movie1 = movieRepository.save(movie1);
+            movie2 = movieRepository.save(movie2);
+            movie3 = movieRepository.save(movie3);
+
 
             movie1 = movieRepository.save(movie1);
             movie2 = movieRepository.save(movie2);
@@ -72,19 +74,19 @@ public class InitApp {
             ShowTimes st1 = new ShowTimes();
             st1.setMovie(movie1);
             st1.setTheatre(theatre);
-            st1.setTimeOfDay(LocalDate.now());
+            st1.setTimeOfDay(LocalDateTime.now());
             st1 = showtimeRepository.save(st1);
 
             ShowTimes st2 = new ShowTimes();
             st2.setMovie(movie1);
             st2.setTheatre(theatre);
-            st2.setTimeOfDay(LocalDate.now());
+            st2.setTimeOfDay(LocalDateTime.now());
             st2 = showtimeRepository.save(st2);
 
             ShowTimes st3 = new ShowTimes();
             st3.setMovie(movie2);
             st3.setTheatre(theatre);
-            st3.setTimeOfDay(LocalDate.now());
+            st3.setTimeOfDay(LocalDateTime.now());
             st3 = showtimeRepository.save(st3);
 
             Seat seat1 = new Seat();

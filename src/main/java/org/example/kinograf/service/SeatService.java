@@ -1,13 +1,16 @@
 package org.example.kinograf.service;
 
+import org.example.kinograf.DTO.ReservationDTO;
 import org.example.kinograf.DTO.SeatDTO;
 import org.example.kinograf.mapper.SeatMapper;
+import org.example.kinograf.model.Reservation;
 import org.example.kinograf.model.Seat;
 import org.example.kinograf.model.Theatre;
 import org.example.kinograf.repository.SeatRepository;
 import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,15 +26,23 @@ public class SeatService {
     }
 
     public List<SeatDTO> getAllSeats() {
-        return seatRepository.findAll()
-                .stream()
-                .map(SeatMapper::toDTO)
-                .toList();
+        List<Seat> seats = seatRepository.findAll();
+        List<SeatDTO> seatDTOS = new ArrayList<>();
+
+        for (Seat seat : seats) {
+            seatDTOS.add(SeatMapper.toDTO(seat));
+        }
+        return seatDTOS;
+
     }
 
     public Optional<SeatDTO> getSeatBySeatId(Long seatId) {
-        return seatRepository.findById(seatId)
-                .map(SeatMapper::toDTO);
+
+        Optional<Seat> seat = seatRepository.findById(seatId);
+        if (seat.isPresent()) {
+            return Optional.of(SeatMapper.toDTO(seat.get()));
+        }
+        return Optional.empty();
     }
 
     public SeatDTO createSeat(
