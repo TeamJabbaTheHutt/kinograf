@@ -1,45 +1,15 @@
-name: Java CI
+name: CI
 
 on:
-  workflow_call:
-
-  #push:
-  #  branches:
-  #    - master
-  #pull_request:
-  #  branches:
-  #    - master
-  #workflow_dispatch:
-
-
-
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  java-test:
+    uses: ./.github/workflows/java-test-reusable.yml
 
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v 6.0.2
-
-      - name: Setup JDK
-        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 #v 5.2.0
-        with:
-          java-version: "25"
-          distribution: 'temurin'
-      - name: cache maven
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 #v 5.0.3
-        with:
-          path: ~/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven-${{ runner.os }}-
-
-
-      - name: run test
-        run: mvn test
-
-      #- name: docker test
-      #  run: |
-      #    docker compose up -d
-      #    sleep 50
-      #    curl -f http://localhost:8080/ # implement || exit 0
-      #    docker compose down
+  docker-ci:
+    needs: java-test
+    uses: ./.github/workflows/docker-ci-reusable.yml
