@@ -74,19 +74,19 @@ public class InitApp {
             ShowTimes st1 = new ShowTimes();
             st1.setMovie(movie1);
             st1.setTheatre(theatre);
-            st1.setTimeOfDay(LocalDate.now());
+            st1.setTimeOfDay(LocalDateTime.now());
             st1 = showtimeRepository.save(st1);
 
             ShowTimes st2 = new ShowTimes();
             st2.setMovie(movie1);
             st2.setTheatre(theatre);
-            st2.setTimeOfDay(LocalDate.now());
+            st2.setTimeOfDay(LocalDateTime.now());
             st2 = showtimeRepository.save(st2);
 
             ShowTimes st3 = new ShowTimes();
             st3.setMovie(movie2);
             st3.setTheatre(theatre);
-            st3.setTimeOfDay(LocalDate.now());
+            st3.setTimeOfDay(LocalDateTime.now());
             st3 = showtimeRepository.save(st3);
 
             Seat seat1 = new Seat();

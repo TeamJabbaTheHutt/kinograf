@@ -11,6 +11,7 @@ import org.example.kinograf.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ShowtimeService {
         return Optional.empty();
     }
 
-    public ShowTimesDTO createShowTimes(Long movieId, Long theatreId, LocalDate timeOfDay) {
+    public ShowTimesDTO createShowTimes(Long movieId, Long theatreId, LocalDateTime timeOfDay) {
 
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
@@ -61,7 +62,7 @@ public class ShowtimeService {
             Long showTimesId,
             Long movieId,
             Long theatreId,
-            LocalDate timeOfDay
+            LocalDateTime timeOfDay
     ) {
 
         ShowTimes updated = showtimeRepository.findById(showTimesId).orElse(null);
