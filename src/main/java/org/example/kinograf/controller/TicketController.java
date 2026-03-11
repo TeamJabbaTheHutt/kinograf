@@ -1,9 +1,9 @@
 package org.example.kinograf.controller;
 
 
-import org.example.kinograf.DTO.CreateTicketRequest;
+import org.example.kinograf.DTO.createRequest.CreateTicketRequest;
 import org.example.kinograf.DTO.TicketDTO;
-import org.example.kinograf.DTO.UpdateTicketRequest;
+import org.example.kinograf.DTO.updateRequest.UpdateTicketRequest;
 import org.example.kinograf.service.TicketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

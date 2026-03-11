@@ -1,8 +1,8 @@
 package org.example.kinograf.controller;
 
-import org.example.kinograf.DTO.CreateMovieRequest;
+import org.example.kinograf.DTO.createRequest.CreateMovieRequest;
 import org.example.kinograf.DTO.MovieDTO;
-import org.example.kinograf.DTO.UpdateMovieRequest;
+import org.example.kinograf.DTO.updateRequest.UpdateMovieRequest;
 import org.example.kinograf.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,7 @@
 package org.example.kinograf.movie;
 
-import org.example.kinograf.DTO.CreateMovieRequest;
+import org.example.kinograf.DTO.createRequest.CreateMovieRequest;
 import org.example.kinograf.DTO.MovieDTO;
-import org.example.kinograf.DTO.UpdateMovieRequest;
-import org.example.kinograf.mapper.MovieMapper;
 import org.example.kinograf.model.Movie;
 import org.example.kinograf.repository.MovieRepository;
 import org.example.kinograf.service.MovieService;

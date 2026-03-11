@@ -1,4 +1,4 @@
-package org.example.kinograf.DTO;
+package org.example.kinograf.DTO.createRequest;
 
 import java.time.LocalDate;
 
