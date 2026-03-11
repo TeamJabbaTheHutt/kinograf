@@ -229,3 +229,7 @@ footer a {
     height: 100%;
 }
 
+.disabled-section {
+    pointer-events: none;
+    opacity: 0;
+}
