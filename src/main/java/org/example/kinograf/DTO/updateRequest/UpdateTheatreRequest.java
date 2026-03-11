@@ -1,4 +1,4 @@
-package org.example.kinograf.DTO;
+package org.example.kinograf.DTO.updateRequest;
 
 public record UpdateTheatreRequest(
         String theatreName,

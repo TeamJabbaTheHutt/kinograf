@@ -1,10 +1,8 @@
 package org.example.kinograf.controller;
 
-import org.example.kinograf.DTO.CreateReservationRequest;
+import org.example.kinograf.DTO.createRequest.CreateReservationRequest;
 import org.example.kinograf.DTO.ReservationDTO;
-import org.example.kinograf.DTO.UpdateReservationRequest;
-import org.example.kinograf.model.Reservation;
-import org.example.kinograf.repository.ReservationRepository;
+import org.example.kinograf.DTO.updateRequest.UpdateReservationRequest;
 import org.example.kinograf.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

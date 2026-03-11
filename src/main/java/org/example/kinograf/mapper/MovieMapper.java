@@ -1,6 +1,6 @@
 package org.example.kinograf.mapper;
 
-import org.example.kinograf.DTO.CreateMovieRequest;
+import org.example.kinograf.DTO.createRequest.CreateMovieRequest;
 import org.example.kinograf.DTO.MovieDTO;
 import org.example.kinograf.model.Movie;
 
