@@ -35,9 +35,9 @@ jobs:
       - name: run test
         run: mvn test
 
-      #- name: docker test
-      #  run: |
-      #    docker compose up -d
-      #    sleep 50
-      #    curl -f http://localhost:8080/ # implement || exit 0
-      #  docker compose down
+      - name: docker test
+        run: |
+          docker compose up -d
+          sleep 50
+          curl -f http://localhost:8080/ # implement || exit 0
+          docker compose down
