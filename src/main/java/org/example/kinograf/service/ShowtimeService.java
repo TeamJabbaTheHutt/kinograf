@@ -48,6 +48,8 @@ public class ShowtimeService {
         Theatre theatre = theatreRepository.findById(theatreId)
                 .orElseThrow(() -> new RuntimeException("Theatre not found"));
 
+        timeOfDay = timeOfDay.withSecond(0).withNano(0);
+
         ShowTimes showTimes = new ShowTimes();
         showTimes.setMovie(movie);
         showTimes.setTheatre(theatre);
@@ -76,6 +78,8 @@ public class ShowtimeService {
 
         Theatre theatre = theatreRepository.findById(theatreId)
                 .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        timeOfDay = timeOfDay.withSecond(0).withNano(0);
 
         updated.setMovie(movie);
         updated.setTheatre(theatre);
