@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,14 @@ public class ShowtimeService {
     }
 
     public List<ShowTimesDTO> getALlShowTimes() {
-        return showtimeRepository.findAll().stream().map(ShowTimesMapper::toDTO).toList();
+        List<ShowTimes> showTimes = showtimeRepository.findAll();
+        List<ShowTimesDTO> dtos = new ArrayList<>();
+
+        for (ShowTimes showtimes : showTimes) {
+            dtos.add(ShowTimesMapper.toDTO(showtimes));
+        }
+        return dtos;
+
     }
 
     public Optional<ShowTimesDTO> getShowTimesById(Long id) {

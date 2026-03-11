@@ -1,6 +1,7 @@
 package org.example.kinograf.service;
 
 import org.example.kinograf.DTO.ReservationDTO;
+import org.example.kinograf.mapper.ReservationMapper;
 import org.example.kinograf.model.Reservation;
 import org.example.kinograf.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
