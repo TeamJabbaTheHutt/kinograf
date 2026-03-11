@@ -219,8 +219,13 @@ footer a {
     align-items: center;
 }
 
+#movieDetails img {
+    object-fit: fill;
+}
+
 .card-img {
     margin-top: 10px;
     object-fit: cover;
     height: 100%;
 }
+

@@ -5,15 +5,16 @@ export async function renderAddMovie(main) {
 
     main.innerHTML = "<label for=\"movieSearch\"></label>\n" +
         "    <input id=\"movieSearch\" type=\"text\" placeholder=\"Search movie\">\n" +
-        "    <div id=\"searchResults\"></div>\n" +
+        "    <div id=\"searchResults\"></div>\<br><br>\n" +
         "\n" +
         "    <div id=\"movieDetails\" style=\"border:1px solid #ccc; padding:15px; max-width:500px;\">\n" +
-        "        <img id=\"moviePoster\" src=\"\" alt=\"Movie Poster\" style=\"width:100%; max-width:300px;\">\n" +
+        "        <img id=\"moviePoster\" src=\"\" alt=\"Movie Poster\" style=\"width:100%; max-width:300px;\"><br>\n" +
         "        <h2 id=\"movieTitle\"></h2>\n" +
         "        <p><strong>Description:</strong> <span id=\"movieDescription\"></span></p>\n" +
         "        <p><strong>Director:</strong> <span id=\"movieDirector\"></span></p>\n" +
         "        <p><strong>Age rating:</strong> <span id=\"movieAge\"></span></p>\n" +
         "        <p><strong>IMDB score:</strong> <span id=\"movieRating\"></span></p>\n" +
+        "        <a id=\"create-button\" class=\"btn btn-green\" href=\"#\">Create Movie</a>\n" +
         "    </div>"
 
     let timer;
