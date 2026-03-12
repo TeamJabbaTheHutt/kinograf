@@ -23,7 +23,7 @@ public class HomeController {
     // For fetching info on movies to show on startpage
     @GetMapping()
     public RedirectView showHome() {
-        return new RedirectView( "/html/index.html");
+        return new RedirectView( "/index.html");
     }
 
     /// controller -> theatre, hvis vi mangler det
