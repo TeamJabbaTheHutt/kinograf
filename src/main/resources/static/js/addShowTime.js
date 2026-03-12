@@ -1,4 +1,4 @@
-import {BASE_URL} from "./config.js";
+// import {BASE_URL} from "./config.js";
 
 export async function renderAddShowtime(main) {
 
@@ -60,7 +60,7 @@ export async function renderAddShowtime(main) {
             timeOfDay: timeValue + ":00"
         };
 
-        await fetch(`${BASE_URL}/showTimes`, {
+        await fetch("/showTimes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -73,11 +73,11 @@ export async function renderAddShowtime(main) {
 }
 
 export async function fetchAllMovies() {
-    const response = await fetch(BASE_URL + "/movies");
+    const response = await fetch("/movies");
     return await response.json();
 }
 
 export async function fetchAllTheatreHalls() {
-    const response = await fetch(BASE_URL + "/home/theatres");
+    const response = await fetch("/home/theatres");
     return await response.json();
 }
