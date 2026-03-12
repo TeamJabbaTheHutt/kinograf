@@ -8,7 +8,7 @@ removeMovieNav.addEventListener("click", (e) => {
     renderRemoveMoviePage();
 });
 
-function renderRemoveMoviePage() {
+export function renderRemoveMoviePage() {
     adminMain.innerHTML = `
         <h2 class="text-center mt-4">Remove Movies</h2>
         <div id="movie-list" class="container mt-4"></div>
