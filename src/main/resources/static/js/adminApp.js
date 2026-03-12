@@ -2,6 +2,7 @@ import { renderAddMovie } from "./addMovie.js";
 // import { renderEditReservation} from "./editReservation";
 import {ADMIN_BASE_URL} from "./config.js";
 import { renderAddShowtime } from "./addShowTime.js";
+import {renderReservations} from "./editReservation.js";
 document.addEventListener("DOMContentLoaded", initApp);
 
 async function initApp() {
@@ -18,6 +19,7 @@ async function initApp() {
 
     navLinkHome.addEventListener("click", () =>  window.location.reload());
     navLinkAddMovie.addEventListener("click", () => renderAddMovie(main));
-
+    const navLinkReservations = document.getElementById("nav-link-reservations");
+    navLinkReservations.addEventListener("click", () => renderReservations(main));
 
 }
