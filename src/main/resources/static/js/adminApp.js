@@ -1,6 +1,8 @@
 import { renderAddMovie } from "./addMovie.js";
 // import { renderEditReservation} from "./editReservation";
 import {ADMIN_BASE_URL} from "./config.js";
+import "./removeMovie.js";
+
 import { renderAddShowtime } from "./addShowTime.js";
 import {renderReservations} from "./editReservation.js";
 document.addEventListener("DOMContentLoaded", initApp);
