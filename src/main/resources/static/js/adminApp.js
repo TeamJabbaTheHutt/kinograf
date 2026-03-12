@@ -1,7 +1,7 @@
 import { renderAddMovie } from "./addMovie.js";
 // import { renderEditReservation} from "./editReservation";
 import {ADMIN_BASE_URL} from "./config.js";
-import "./removeMovie.js";
+import {renderRemoveMoviePage} from "./removeMovie.js";
 
 import { renderAddShowtime } from "./addShowTime.js";
 import {renderReservations} from "./editReservation.js";
@@ -15,6 +15,10 @@ async function initApp() {
    // const navLinkEditReservation = document.getElementById()
     const navLinkAddShowtime = document.getElementById("nav-link-add-showtime");
     const btnAddShowtime = document.getElementById("btn-add-showtime");
+
+    const btnRemoveMovie = document.getElementById("btn-remove-movie");
+    btnRemoveMovie.addEventListener("click", () => renderRemoveMoviePage());
+
 
     btnAddShowtime.addEventListener("click", () => renderAddShowtime(main));
     navLinkAddShowtime.addEventListener("click", () => renderAddShowtime(main));
