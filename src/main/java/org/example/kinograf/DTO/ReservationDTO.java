@@ -1,7 +1,7 @@
 package org.example.kinograf.DTO;
 
 public record ReservationDTO(
-        long reservationId,
+        Long reservationId,
         String customerName,
         String phoneNumber
 ) {
