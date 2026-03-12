@@ -1,6 +1,14 @@
 import {BASE_URL} from "./config.js";
 
-export function renderAddShowtime(main) {
+export async function renderAddShowtime(main) {
+
+    const movies = await fetchAllMovies();
+
+    let movieOptions = "";
+
+    movies.forEach(movie => {
+        movieOptions += `<option value="${movie.movieId}">${movie.name}</option>`;
+    });
 
     main.innerHTML = `
         <h2>Add Showtime</h2>
@@ -8,8 +16,10 @@ export function renderAddShowtime(main) {
         <form id="showtime-form">
         
             <div class="form-group">
-                <label>Movie ID</label>
-                <input type="number" id="movieId" class="form-control" required>
+                <label>Movie</label>
+                <select id="movieId" class="form-control">
+                    ${movieOptions}
+                </select>
             </div>
 
             <div class="form-group">
@@ -50,4 +60,9 @@ export function renderAddShowtime(main) {
 
         alert("Showtime created!");
     });
+}
+
+export async function fetchAllMovies() {
+    const response = await fetch(BASE_URL + "/movies");
+    return await response.json();
 }
