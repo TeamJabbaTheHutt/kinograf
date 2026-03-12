@@ -12,16 +12,6 @@ import java.util.Optional;
 @Service
 public class TheatreServiceImpl implements TheatreService {
 
-//    List<TheatreDTO> getAllTheatres();
-//    List<Theatre> getAllTheatreEntities();
-//
-//    Optional<TheatreDTO> getTheatreById(Long theatreId);
-//    Optional<Theatre> getTheatreEntityById(Long theatreId);
-//
-//    TheatreDTO createTheatre(TheatreDTO theatreDTO);
-//    TheatreDTO updateTheatre(TheatreDTO theatreDTO);
-//    void deleteTheatre(int theatreId);
-
     private final TheatreRepository theatreRepository;
 
     public TheatreServiceImpl(TheatreRepository theatreRepository) {
@@ -57,8 +47,6 @@ public class TheatreServiceImpl implements TheatreService {
         return theatreRepository.findById(id);
     }
 
-//    TheatreDTO updateTheatre(TheatreDTO theatreDTO);
-//    void deleteTheatre(int theatreId);
     @Override
     public TheatreDTO createTheatre(String theatreName, int capacity, int rowsInTheatre, int seatsInTheatre) {
         Theatre theatre = new Theatre();

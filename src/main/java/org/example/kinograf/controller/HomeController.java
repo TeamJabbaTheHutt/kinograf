@@ -41,16 +41,7 @@ public class HomeController {
         }
         return ResponseEntity.notFound().build();
     }
-    @PostMapping("/theatre")
-    public ResponseEntity<TheatreDTO>  createTheatre(@RequestBody CreateTheatreRequest request) {
-        TheatreDTO saved = theatreService.createTheatre(
-                request.theatreName(),
-                request.capacity(),
-                request.rowsInTheatre(),
-                request.seatsInTheatre()
-        );
-        return ResponseEntity.ok(saved);
-    }
+
 
     @PutMapping("/theatres/{id}")
     public ResponseEntity<TheatreDTO> updateTheatre(@PathVariable Long id, @RequestBody UpdateTheatreRequest request) {

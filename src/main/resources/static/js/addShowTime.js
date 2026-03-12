@@ -10,6 +10,14 @@ export async function renderAddShowtime(main) {
         movieOptions += `<option value="${movie.movieId}">${movie.name}</option>`;
     });
 
+    const theatreHalls = await fetchAllTheatreHalls();
+
+    let theatreHallOptions = "";
+
+    theatreHalls.forEach(theatre => {
+        theatreHallOptions += `<option value="${theatre.theatreId}">${theatre.theatreName}</option>`;
+    });
+
     main.innerHTML = `
         <h2>Add Showtime</h2>
 
@@ -24,7 +32,9 @@ export async function renderAddShowtime(main) {
 
             <div class="form-group">
                 <label>Theatre ID</label>
-                <input type="number" id="theatreId" class="form-control" required>
+                <select id="theatreId" class="form-control">
+                    ${theatreHallOptions}
+                </select>
             </div>
 
             <div class="form-group">
@@ -64,5 +74,10 @@ export async function renderAddShowtime(main) {
 
 export async function fetchAllMovies() {
     const response = await fetch(BASE_URL + "/movies");
+    return await response.json();
+}
+
+export async function fetchAllTheatreHalls() {
+    const response = await fetch(BASE_URL + "/home/theatres");
     return await response.json();
 }
