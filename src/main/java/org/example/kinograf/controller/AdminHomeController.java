@@ -14,6 +14,4 @@ public class AdminHomeController {
     public String showAdminHomepage() {
         return "redirect:adminHomepage.html";
     }
-
-
 }

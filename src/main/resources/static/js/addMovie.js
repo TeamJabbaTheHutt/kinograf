@@ -3,24 +3,38 @@ let selectedMovie = null;
 export async function renderAddMovie(main) {
     main.innerHTML = "";
 
-    main.innerHTML =
-        "<label for=\"movieSearch\"></label>" +
-        "<input id=\"movieSearch\" type=\"text\" placeholder=\"Search movie\">" +
-        "<div id=\"searchResults\"></div><br><br>" +
+    main.innerHTML = `
+        <section class="add-movie-page">
+            <div class="add-movie-search">
+                <input id="movieSearch" type="text" placeholder="Search movie..." />
+                <div id="searchResults" class="search-results"></div>
+            </div>
 
-        "<div id='movieSection' class='disabled-section'>" +
+            <div id="movieSection" class="movie-section disabled-section">
+                <div id="movieDetails" class="movie-details-card">
+                    <div class="movie-poster-wrapper">
+                        <img id="moviePoster" src="" alt="Movie Poster" />
+                    </div>
 
-        "    <div id=\"movieDetails\" style=\"border:1px solid #ccc; padding:15px; max-width:500px;\">" +
-        "        <img id=\"moviePoster\" src=\"\" alt=\"Movie Poster\" style=\"width:100%; max-width:300px;\"><br>" +
-        "        <h2 id=\"movieTitle\"></h2>" +
-        "        <p><strong>Description:</strong> <span id=\"movieDescription\"></span></p>" +
-        "        <p><strong>Director:</strong> <span id=\"movieDirector\"></span></p>" +
-        "        <p><strong>Age rating:</strong> <span id=\"movieAge\"></span></p>" +
-        "        <p><strong>IMDB score:</strong> <span id=\"movieRating\"></span></p>" +
-        "        <button id=\"create-button\" class=\"btn btn-green\">Create Movie</button>" +
-        "    </div>" +
+                    <div class="movie-info">
+                        <h2 id="movieTitle"></h2>
 
-        "</div>";
+                        <div class="movie-meta">
+                            <p><strong>Description:</strong></p>
+                            <p id="movieDescription" class="movie-description"></p>
+
+                            <p><strong>Director:</strong> <span id="movieDirector"></span></p>
+                            <p><strong>Age rating:</strong> <span id="movieAge"></span></p>
+                            <p><strong>IMDb score:</strong> <span id="movieRating"></span></p>
+                        </div>
+
+                        <button id="create-button" class="createBtn">Create Movie</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+
     let timer;
 
     document.getElementById("movieSearch").addEventListener("input", () => {
@@ -53,13 +67,11 @@ function showResults(movies) {
 
     movies.forEach(movie => {
         const item = document.createElement("div");
-
-        item.textContent = movie.Title;
-        item.style.cursor = "pointer";
+        item.className = "search-result-item";
+        item.textContent = `${movie.Title} (${movie.Year})`;
         item.onclick = () => selectMovie(movie.imdbID);
-
         results.appendChild(item);
-    })
+    });
 }
 
 async function selectMovie(id) {

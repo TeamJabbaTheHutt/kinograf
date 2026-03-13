@@ -6,16 +6,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Configuration
 public class InitApp {
 
     @Bean
     CommandLineRunner initDatabase(MovieRepository movieRepository,
-                                   ReservationRepository reservationRepository, ShowtimeRepository showtimeRepository,
+                                   ReservationRepository reservationRepository,
+                                   ShowtimeRepository showtimeRepository,
                                    TheatreRepository theatreRepository,
                                    TicketRepository ticketRepository,
                                    SeatRepository seatRepository) {
@@ -24,33 +23,25 @@ public class InitApp {
             Theatre theatre = new Theatre();
             theatre.setTheatreName("Opera");
             theatre.setCapacity(25);
-            theatre.setRowsInTheatre(20); // rows y
-            theatre.setSeatsInTheatre(12); // columns x
+            theatre.setRowsInTheatre(20);
+            theatre.setSeatsInTheatre(12);
             theatre = theatreRepository.save(theatre);
 
             Movie movie1 = new Movie();
-            movie1.setName("Dune");
-            movie1.setOmdbID("tt1160419"); // Dune (2021)
+            movie1.setName("Inception");
+            movie1.setOmdbID("tt1375666");
 
             Movie movie2 = new Movie();
-            movie2.setName("Batman");
-            movie2.setOmdbID("tt1877830"); // The Batman (2022)
+            movie2.setName("The Dark Knight");
+            movie2.setOmdbID("tt0468569");
 
             Movie movie3 = new Movie();
-            movie3.setName("Frozen");
-            movie3.setOmdbID("tt2294629"); // Frozen (2013)
+            movie3.setName("Interstellar");
+            movie3.setOmdbID("tt0816692");
 
             movie1 = movieRepository.save(movie1);
             movie2 = movieRepository.save(movie2);
             movie3 = movieRepository.save(movie3);
-
-
-            movie1 = movieRepository.save(movie1);
-            movie2 = movieRepository.save(movie2);
-            movie3 = movieRepository.save(movie3);
-
-
-
 
             Reservation r1 = new Reservation();
             r1.setCustomerName("John Doe");
@@ -64,39 +55,33 @@ public class InitApp {
             r3.setCustomerName("Peter Parker");
             r3.setPhoneNumber("11223344");
 
-            r1 = reservationRepository.save(r1);
-            r2 = reservationRepository.save(r2);
-            r3 = reservationRepository.save(r3);
-
-
-
+            reservationRepository.save(r1);
+            reservationRepository.save(r2);
+            reservationRepository.save(r3);
 
             ShowTimes st1 = new ShowTimes();
             st1.setMovie(movie1);
             st1.setTheatre(theatre);
-            st1.setTimeOfDay(LocalDateTime.now());
-            st1 = showtimeRepository.save(st1);
+            st1.setTimeOfDay(LocalDateTime.now().plusDays(1).withHour(18).withMinute(30));
+            showtimeRepository.save(st1);
 
             ShowTimes st2 = new ShowTimes();
-            st2.setMovie(movie1);
+            st2.setMovie(movie2);
             st2.setTheatre(theatre);
-            st2.setTimeOfDay(LocalDateTime.now());
-            st2 = showtimeRepository.save(st2);
+            st2.setTimeOfDay(LocalDateTime.now().plusDays(1).withHour(21).withMinute(0));
+            showtimeRepository.save(st2);
 
             ShowTimes st3 = new ShowTimes();
-            st3.setMovie(movie2);
+            st3.setMovie(movie3);
             st3.setTheatre(theatre);
-            st3.setTimeOfDay(LocalDateTime.now());
-            st3 = showtimeRepository.save(st3);
+            st3.setTimeOfDay(LocalDateTime.now().plusDays(2).withHour(19).withMinute(15));
+            showtimeRepository.save(st3);
 
             Seat seat1 = new Seat();
             seat1.setSeatNumber(5);
             seat1.setSeatRow(5);
             seat1.setTheatre(theatre);
-            seat1 = seatRepository.save(seat1);
-
-
-
+            seatRepository.save(seat1);
 
             Ticket ticket = new Ticket();
             ticket.setPrice(100);
@@ -107,4 +92,3 @@ public class InitApp {
         };
     }
 }
-

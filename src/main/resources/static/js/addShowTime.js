@@ -1,4 +1,4 @@
-import {BASE_URL} from "./config.js";
+// import {BASE_URL} from "./config.js";
 
 export async function renderAddShowtime(main) {
 
@@ -10,21 +10,31 @@ export async function renderAddShowtime(main) {
         movieOptions += `<option value="${movie.movieId}">${movie.name}</option>`;
     });
 
+    const theatreHalls = await fetchAllTheatreHalls();
+
+    let theatreHallOptions = "";
+
+    theatreHalls.forEach(theatre => {
+        theatreHallOptions += `<option value="${theatre.theatreId}">${theatre.theatreName}</option>`;
+    });
+
     main.innerHTML = `
         <h2>Add Showtime</h2>
 
         <form id="showtime-form">
         
             <div class="form-group">
-                <label>Movie</label>
+                <label>Choose Movie</label>
                 <select id="movieId" class="form-control">
                     ${movieOptions}
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Theatre ID</label>
-                <input type="number" id="theatreId" class="form-control" required>
+                <label>Choose Theatre</label>
+                <select id="theatreId" class="form-control">
+                    ${theatreHallOptions}
+                </select>
             </div>
 
             <div class="form-group">
@@ -50,7 +60,7 @@ export async function renderAddShowtime(main) {
             timeOfDay: timeValue + ":00"
         };
 
-        await fetch(`${BASE_URL}/showTimes`, {
+        await fetch("/showTimes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -63,6 +73,11 @@ export async function renderAddShowtime(main) {
 }
 
 export async function fetchAllMovies() {
-    const response = await fetch(BASE_URL + "/movies");
+    const response = await fetch("/movies");
+    return await response.json();
+}
+
+export async function fetchAllTheatreHalls() {
+    const response = await fetch("/home/theatres");
     return await response.json();
 }

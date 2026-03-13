@@ -66,68 +66,68 @@ export async function renderAddTimeAndHall(movie) {
     });
 }
 
-export async function renderAddNewMovie() {
-    console.log("Add a new movie");
-
-
-    const form = document.createElement("form");
-
-    form.classList.add("formLayout");
-
-    form.innerHTML = `
-        <h4>Add New Movie</h4>
-
-        <label for="movieName">Movie Name:</label><br>
-        <input type="text" name="name" "><br>
-
-        <label for="categories">Categories:</label><br>
-        <input type="text" name="categories" placeholder="Action, Comedy, ..." "><br>
-
-        <label for="ageLimit">Age Limit:</label><br>
-        <input type="number" name="ageLimit""><br>
-
-        <button class="addTimeAndHallBtn" type="submit">Save</button>
-        <button class="cancelBtn" type="button" id="cancelForm">Cancel</button>
-    `;
-
-
-    const button = document.getElementById("createNewMovieBtn");
-    button.insertAdjacentElement("afterend", form);
-
-
-    form.querySelector("#cancelForm").addEventListener("click", () => form.remove());
-
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const name = form.name.value;
-        const categories = form.categories.value;
-        const ageLimit = parseInt(form.ageLimit.value);
-
-        try {
-            const res = await fetch(`${BASE_URL}/movies`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: name,
-                    categories: categories,
-                    ageLimit: ageLimit
-                })
-            });
-
-            if (res.ok) {
-                form.remove();
-                await renderViewSchedule(document.querySelector("main"));
-            } else {
-                const text = await res.text();
-                console.error("Failed to add movie:", res.status, text);
-            }
-        } catch (err) {
-            console.error("Error adding movie:", err);
-        }
-    });
-}
+// export async function renderAddNewMovie() {
+//     console.log("Add a new movie");
+//
+//
+//     const form = document.createElement("form");
+//
+//     form.classList.add("formLayout");
+//
+//     form.innerHTML = `
+//         <h4>Add New Movie</h4>
+//
+//         <label for="movieName">Movie Name:</label><br>
+//         <input type="text" name="name" "><br>
+//
+//         <label for="categories">Categories:</label><br>
+//         <input type="text" name="categories" placeholder="Action, Comedy, ..." "><br>
+//
+//         <label for="ageLimit">Age Limit:</label><br>
+//         <input type="number" name="ageLimit""><br>
+//
+//         <button class="addTimeAndHallBtn" type="submit">Save</button>
+//         <button class="cancelBtn" type="button" id="cancelForm">Cancel</button>
+//     `;
+//
+//
+//     const button = document.getElementById("createNewMovieBtn");
+//     button.insertAdjacentElement("afterend", form);
+//
+//
+//     form.querySelector("#cancelForm").addEventListener("click", () => form.remove());
+//
+//
+//     form.addEventListener("submit", async (e) => {
+//         e.preventDefault();
+//
+//         const name = form.name.value;
+//         const categories = form.categories.value;
+//         const ageLimit = parseInt(form.ageLimit.value);
+//
+//         try {
+//             const res = await fetch(`${BASE_URL}/movies`, {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify({
+//                     name: name,
+//                     categories: categories,
+//                     ageLimit: ageLimit
+//                 })
+//             });
+//
+//             if (res.ok) {
+//                 form.remove();
+//                 await renderViewSchedule(document.querySelector("main"));
+//             } else {
+//                 const text = await res.text();
+//                 console.error("Failed to add movie:", res.status, text);
+//             }
+//         } catch (err) {
+//             console.error("Error adding movie:", err);
+//         }
+//     });
+// }
 
 
 
