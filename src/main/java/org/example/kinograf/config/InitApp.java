@@ -20,6 +20,10 @@ public class InitApp {
                                    SeatRepository seatRepository) {
 
         return args -> {
+            if (movieRepository.count() > 0) {
+                return;
+            }
+
             Theatre theatre = new Theatre();
             theatre.setTheatreName("Opera");
             theatre.setRowsInTheatre(10);
@@ -55,33 +59,33 @@ public class InitApp {
             r3.setCustomerName("Peter Parker");
             r3.setPhoneNumber("11223344");
 
-            reservationRepository.save(r1);
-            reservationRepository.save(r2);
-            reservationRepository.save(r3);
+            r1 = reservationRepository.save(r1);
+            r2 = reservationRepository.save(r2);
+            r3 = reservationRepository.save(r3);
 
             ShowTimes st1 = new ShowTimes();
             st1.setMovie(movie1);
             st1.setTheatre(theatre);
             st1.setTimeOfDay(LocalDateTime.now().plusDays(1).withHour(18).withMinute(30));
-            showtimeRepository.save(st1);
+            st1 = showtimeRepository.save(st1);
 
             ShowTimes st2 = new ShowTimes();
             st2.setMovie(movie2);
             st2.setTheatre(theatre);
             st2.setTimeOfDay(LocalDateTime.now().plusDays(1).withHour(21).withMinute(0));
-            showtimeRepository.save(st2);
+            st2 = showtimeRepository.save(st2);
 
             ShowTimes st3 = new ShowTimes();
             st3.setMovie(movie3);
             st3.setTheatre(theatre);
             st3.setTimeOfDay(LocalDateTime.now().plusDays(2).withHour(19).withMinute(15));
-            showtimeRepository.save(st3);
+            st3 = showtimeRepository.save(st3);
 
             Seat seat1 = new Seat();
             seat1.setSeatNumber(5);
             seat1.setSeatRow(5);
             seat1.setTheatre(theatre);
-            seatRepository.save(seat1);
+            seat1 = seatRepository.save(seat1);
 
             Ticket ticket = new Ticket();
             ticket.setPrice(100);
