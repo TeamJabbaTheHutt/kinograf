@@ -22,9 +22,9 @@ public class InitApp {
         return args -> {
             Theatre theatre = new Theatre();
             theatre.setTheatreName("Opera");
-            theatre.setCapacity(25);
-            theatre.setRowsInTheatre(20);
+            theatre.setRowsInTheatre(10);
             theatre.setSeatsInTheatre(12);
+            theatre.setCapacity(10 * 12);
             theatre = theatreRepository.save(theatre);
 
             Movie movie1 = new Movie();

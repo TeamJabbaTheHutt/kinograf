@@ -106,14 +106,15 @@ function renderBookButton(container, selectedSeats, item) {
     container.innerHTML = "";
 
     if (selectedSeats.length === 0) return;
-
+    const priceP = document.createElement("p");
+    priceP.textContent = `Total Price: ${selectedSeats.length * 135} DKK`;
     const btn = document.createElement("button");
     btn.textContent = `Book ${selectedSeats.length} Seat(s)`;
     btn.classList.add("addTimeAndHallBtn");
     btn.addEventListener("click", () => {
         renderBookSeatForm(container, selectedSeats, item);
     });
-
+    container.appendChild(priceP);
     container.appendChild(btn);
 }
 
@@ -129,6 +130,9 @@ function renderBookSeatForm(container, selectedSeats, item) {
 
                 <p style="color:white;">
                     Selected seats: ${selectedSeats.join(", ")}
+                </p>
+                <p style="color:white;">
+                    Price: ${selectedSeats.length * 135} DKK
                 </p>
 
                 <input type="text" name="name" placeholder="Name" required>
