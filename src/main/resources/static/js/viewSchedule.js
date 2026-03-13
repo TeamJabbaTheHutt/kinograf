@@ -8,7 +8,8 @@ async function fetchMovieDetails(omdbID) {
         return {
             poster: "",
             rating: "N/A",
-            runtime: "N/A"
+            runtime: "N/A",
+            ageRating: "N/A"
         };
     }
 
@@ -21,14 +22,16 @@ async function fetchMovieDetails(omdbID) {
         return {
             poster: movie.Poster !== "N/A" ? movie.Poster : "",
             rating: movie.imdbRating || "N/A",
-            runtime: movie.Runtime || "N/A"
+            runtime: movie.Runtime || "N/A",
+            ageRating: movie.Rated || "N/A"
         };
     } catch (error) {
         console.error("Error fetching movie details:", error);
         return {
             poster: "",
             rating: "N/A",
-            runtime: "N/A"
+            runtime: "N/A",
+            ageRating: "N/A"
         };
     }
 }
@@ -47,7 +50,8 @@ export async function renderViewSchedule(mainContainer) {
                 ...movie,
                 poster: omdbData.poster,
                 rating: omdbData.rating,
-                runtime: omdbData.runtime
+                runtime: omdbData.runtime,
+                ageRating: omdbData.ageRating
             };
         })
     );
@@ -80,6 +84,8 @@ export async function renderViewSchedule(mainContainer) {
                             <div class="schedule-meta">
                                 <span class="meta-badge">IMDb ${movie.rating}</span>
                                 <span class="meta-badge">${movie.runtime}</span>
+                                <span class="meta-badge">${movie.ageRating}</span>
+                                <span class="meta-badge">Price: 135 DKK</span>
                             </div>
                         </div>
                     </div>
