@@ -24,14 +24,14 @@ export async function renderAddShowtime(main) {
         <form id="showtime-form">
         
             <div class="form-group">
-                <label>Movie</label>
+                <label>Choose Movie</label>
                 <select id="movieId" class="form-control">
                     ${movieOptions}
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Theatre ID</label>
+                <label>Choose Theatre</label>
                 <select id="theatreId" class="form-control">
                     ${theatreHallOptions}
                 </select>

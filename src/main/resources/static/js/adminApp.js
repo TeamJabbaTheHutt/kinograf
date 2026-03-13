@@ -17,9 +17,15 @@ async function initApp() {
 
     const btnAddShowtime = document.getElementById("btn-add-showtime");
     const btnRemoveMovie = document.getElementById("btn-remove-movie");
+    const btnAddMovie = document.getElementById("btn-add-movie");
+    const btnCreateTheatre = document.getElementById("btn-btn-add-hall");
+    const btnReservations = document.getElementById("btn-reservations");
 
     btnRemoveMovie.addEventListener("click", () => renderRemoveMoviePage());
     btnAddShowtime.addEventListener("click", () => renderAddShowtime(main));
+    btnCreateTheatre.addEventListener("click", () => renderViewAddTheatreHall(main));
+    btnAddMovie.addEventListener("click", () => renderAddMovie(main));
+    btnReservations.addEventListener("click", () => renderReservations(main));
 
     navLinkAddShowtime.addEventListener("click", () => renderAddShowtime(main));
 
