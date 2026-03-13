@@ -1,32 +1,32 @@
 import {BASE_URL} from "./config.js";
 
 export async function fetchAllReservations() {
-    const response = await fetch(BASE_URL + "/reservations");
+    const response = await fetch("/reservations");
     return await response.json();
 }
 
 export async function fetchAllTickets() {
-    const response = await fetch(BASE_URL + "/ticket/tickets");
+    const response = await fetch("/ticket/tickets");
     return await response.json();
 }
 
 export async function fetchAllShowing() {
-    const response = await fetch(BASE_URL + "/showTimes");
+    const response = await fetch("/showTimes");
     return await response.json();
 }
 
 export async function fetchMovieById(id) {
-    const response = await fetch(BASE_URL + "/movies/" + id);
+    const response = await fetch("/movies/" + id);
     return await response.json();
 }
 
 export async function fetchTheatreById(id) {
-    const response = await fetch(BASE_URL + "/home/theatres/" + id);
+    const response = await fetch("/home/theatres/" + id);
     return await response.json();
 }
 
 export async function fetchSeatsById(id) {
-    const response = await fetch(BASE_URL + "/seats/" + id);
+    const response = await fetch("/seats/" + id);
     return await response.json();
 }
 export async function renderReservations(main) {
@@ -102,7 +102,7 @@ export async function renderReservations(main) {
 export async function deleteReservation(ticketId, reservationId, seatId, main) {
     try {
         try {
-            const ticketResp = await fetch(`${BASE_URL}/ticket/tickets/${ticketId}`, {
+            const ticketResp = await fetch(`/ticket/tickets/${ticketId}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
             });
@@ -113,7 +113,7 @@ export async function deleteReservation(ticketId, reservationId, seatId, main) {
         }
 
         try {
-            const resResp = await fetch(`${BASE_URL}/reservations/${reservationId}`, {
+            const resResp = await fetch(`/reservations/${reservationId}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
             });
@@ -124,7 +124,7 @@ export async function deleteReservation(ticketId, reservationId, seatId, main) {
         }
 
         try {
-            const seatResp = await fetch(`${BASE_URL}/seats/${seatId}`, {
+            const seatResp = await fetch(`/seats/${seatId}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
             });

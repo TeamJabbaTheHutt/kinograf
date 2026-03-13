@@ -43,7 +43,7 @@ export async function renderAddTimeAndHall(movie) {
         try {
 
 
-            const res = await fetch(`${BASE_URL}/showTimes`, {
+            const res = await fetch(`/showTimes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -135,7 +135,7 @@ export async function deleteShowtime(showtimeId) {
     console.log("id:", showtimeId);
 
     try {
-        const response = await fetch(`${BASE_URL}/showTimes/${showtimeId}`, {
+        const response = await fetch(`/showTimes/${showtimeId}`, {
             method: "DELETE",
         });
 

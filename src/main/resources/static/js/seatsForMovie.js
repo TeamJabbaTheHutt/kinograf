@@ -166,7 +166,7 @@ function renderBookSeatForm(container, selectedSeats, item) {
 async function bookSeats(container, selectedSeats, item, name, phonenumber) {
 
     try {
-        const res = await fetch(`${BASE_URL}/reservations`, {
+        const res = await fetch(`/reservations`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ customerName: name, phonenumber: phonenumber })
@@ -183,7 +183,7 @@ async function bookSeats(container, selectedSeats, item, name, phonenumber) {
             const [row, seatNumber] = seatLabel.split("-").map(Number);
 
             // 2a️⃣ Create the seat
-            const createSeatRes = await fetch(`${BASE_URL}/seats`, {
+            const createSeatRes = await fetch(`/seats`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -200,7 +200,7 @@ async function bookSeats(container, selectedSeats, item, name, phonenumber) {
 
             const seat = await createSeatRes.json();
 
-            const ticketRes = await fetch(`${BASE_URL}/ticket/ticket`, {
+            const ticketRes = await fetch(`/ticket/ticket`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
