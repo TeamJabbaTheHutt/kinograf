@@ -22,11 +22,9 @@ public class HomeController {
 
     // For fetching info on movies to show on startpage
     @GetMapping()
-    public RedirectView showHome() {
-        return new RedirectView( "/index.html");
+    public String showHome() {
+        return "redirect:/index.html";
     }
-
-    /// controller -> theatre, hvis vi mangler det
 
     @GetMapping("/theatres")
     public List<TheatreDTO> getTheatres() {
