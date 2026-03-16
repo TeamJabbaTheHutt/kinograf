@@ -40,8 +40,7 @@ public class TicketController {
         TicketDTO saved = ticketService.createTicket(
                 request.showingId(),
                 request.reservationId(),
-                request.seatId(),
-                request.price()
+                request.seatId()
         );
         return ResponseEntity.ok(saved);
     }
@@ -52,8 +51,7 @@ public class TicketController {
                 id,
                 request.showingId(),
                 request.reservationId(),
-                request.seatId(),
-                request.price()
+                request.seatId()
         );
         return ResponseEntity.ok(saved);
     }

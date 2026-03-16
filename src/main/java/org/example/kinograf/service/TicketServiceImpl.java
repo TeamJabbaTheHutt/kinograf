@@ -58,16 +58,8 @@ public class TicketServiceImpl implements TicketService {
         return Optional.empty();
     }
 
-//    // crud
-//    TicketDTO createTicket(
-//            Long showingId,
-//            Long reservationId,
-//            Long seatId,
-//            double price
-//    );
-//
     @Override
-    public TicketDTO createTicket(Long showingId, Long reservationId, Long seatId, double price) {
+    public TicketDTO createTicket(Long showingId, Long reservationId, Long seatId) {
 
         ShowTimes showTimes = showtimesRepository.findById(showingId)
                 .orElseThrow();
@@ -79,7 +71,6 @@ public class TicketServiceImpl implements TicketService {
                 .orElseThrow();
 
         Ticket ticket = new Ticket();
-        ticket.setPrice(price);
         ticket.setShowTimes(showTimes);
         ticket.setReservation(reservation);
         ticket.setSeat(seat);
@@ -89,22 +80,12 @@ public class TicketServiceImpl implements TicketService {
         return TicketMapper.toDTO(saved);
     }
 
-//    TicketDTO updateTicket(
-//            Long ticketId,
-//            Long showingId,
-//            Long reservationId,
-//            Long seatId,
-//            double price
-//    );
-//
-
     @Override
     public TicketDTO updateTicket(
             Long ticketId,
             Long showingId,
             Long reservationId,
-            Long seatId,
-            double price
+            Long seatId
     ) {
 
         Ticket existing = ticketRepository.findById(ticketId)
@@ -122,7 +103,6 @@ public class TicketServiceImpl implements TicketService {
         existing.setShowTimes(showTimes);
         existing.setReservation(reservation);
         existing.setSeat(seat);
-        existing.setPrice(price);
 
         Ticket saved = ticketRepository.save(existing);
 

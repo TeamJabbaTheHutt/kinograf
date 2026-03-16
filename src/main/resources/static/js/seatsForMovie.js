@@ -138,7 +138,7 @@ function renderBookSeatForm(container, selectedSeats, item) {
                 <input type="text" name="name" placeholder="Name" required>
                 <br><br>
 
-                <input type="number" name="phone" placeholder="Phonenumber" required>
+                <input type="text" name="phone" placeholder="Phonenumber" required>
                 <br><br>
 
                 <button class="addTimeAndHallBtn" type="submit">Reserve Seats</button>
@@ -152,24 +152,24 @@ function renderBookSeatForm(container, selectedSeats, item) {
         e.preventDefault();
 
         const name = form.name.value;
-        const phonenumber = form.phone.value;
+        const phoneNumber = form.phone.value;
 
         console.log("Selected seats:", selectedSeats);
         console.log("Showtime item:", item);
         console.log("Name:", name);
-        console.log("Phone:", phonenumber);
+        console.log("Phone:", phoneNumber);
 
-        await bookSeats(container, selectedSeats, item, name, phonenumber);
+        await bookSeats(container, selectedSeats, item, name, phoneNumber);
     });
 }
 
-async function bookSeats(container, selectedSeats, item, name, phonenumber) {
+async function bookSeats(container, selectedSeats, item, name, phoneNumber) {
 
     try {
         const res = await fetch(`/reservations`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ customerName: name, phonenumber: phonenumber })
+            body: JSON.stringify({ customerName: name, phoneNumber: phoneNumber })
         });
 
         if (!res.ok) {

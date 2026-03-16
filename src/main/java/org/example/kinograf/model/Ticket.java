@@ -8,12 +8,14 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticketId;
-    private double price;
+    public static final double FIXED_PRICE = 135.0;
 
 
     @ManyToOne
     @JoinColumn(name = "showTimes_id")
     private ShowTimes showTimes;
+
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
@@ -25,9 +27,9 @@ public class Ticket {
 
     public Ticket() {}
 
-    public Ticket(Long ticketId, double price, ShowTimes showTimes, Reservation reservation, Seat seat) {
+    public Ticket(Long ticketId, ShowTimes showTimes, Reservation reservation, Seat seat) {
         this.ticketId = ticketId;
-        this.price = price;
+        this.price = FIXED_PRICE;
         this.showTimes = showTimes;
         this.reservation = reservation;
         this.seat = seat;
@@ -46,7 +48,7 @@ public class Ticket {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price = FIXED_PRICE;
     }
 
     public ShowTimes getShowTimes() {
