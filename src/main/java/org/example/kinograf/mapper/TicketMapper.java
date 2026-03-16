@@ -18,7 +18,6 @@ public class TicketMapper {
     public static Ticket fromDTO(TicketDTO dto) {
         Ticket ticket = new Ticket();
         ticket.setTicketId(dto.ticketId());
-        ticket.setPrice(dto.price());
         return ticket;
     }
 }

@@ -87,12 +87,48 @@ public class InitApp {
             seat1.setTheatre(theatre);
             seat1 = seatRepository.save(seat1);
 
+            Seat seat2 = new Seat();
+            seat2.setSeatNumber(1);
+            seat2.setSeatRow(1);
+            seat2.setTheatre(theatre);
+            seat2 = seatRepository.save(seat2);
+
+            Seat seat3 = new Seat();
+            seat3.setSeatNumber(2);
+            seat3.setSeatRow(1);
+            seat3.setTheatre(theatre);
+            seat3 = seatRepository.save(seat3);
+
+            Seat seat4 = new Seat();
+            seat4.setSeatNumber(1);
+            seat4.setSeatRow(1);
+            seat4.setTheatre(theatre);
+            seat4 = seatRepository.save(seat4);
+
+
             Ticket ticket = new Ticket();
-            ticket.setPrice(100);
             ticket.setReservation(r1);
             ticket.setSeat(seat1);
             ticket.setShowTimes(st1);
             ticketRepository.save(ticket);
+
+            Ticket ticket2 = new Ticket();
+            ticket2.setReservation(r2);
+            ticket2.setSeat(seat2);
+            ticket2.setShowTimes(st2);
+            ticketRepository.save(ticket2);
+
+            Ticket ticket3 = new Ticket();
+            ticket3.setReservation(r2);
+            ticket3.setSeat(seat3);
+            ticket3.setShowTimes(st3);
+            ticketRepository.save(ticket3);
+
+            Ticket ticket4 = new Ticket();
+            ticket4.setReservation(r3);
+            ticket4.setSeat(seat4);
+            ticket4.setShowTimes(st3);
+            ticketRepository.save(ticket4);
         };
     }
 }

@@ -13,16 +13,14 @@ public interface TicketService {
     TicketDTO createTicket(
             Long showingId,
             Long reservationId,
-            Long seatId,
-            double price
+            Long seatId
     );
 
     TicketDTO updateTicket(
             Long ticketId,
             Long showingId,
             Long reservationId,
-            Long seatId,
-            double price
+            Long seatId
     );
 
     void deleteTicket(Long ticketId);
